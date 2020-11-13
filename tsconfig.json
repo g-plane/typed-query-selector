@@ -1,0 +1,6 @@
+{
+  "extends": "@gplane/tsconfig",
+  "compilerOptions": {
+    "noUnusedLocals": false
+  }
+}
