@@ -19,6 +19,10 @@ type _Tests = [
   Expect<Equal<ParseSelector<'button#submit'>, HTMLButtonElement>>,
   Expect<Equal<ParseSelector<'input[type=email]'>, HTMLInputElement>>,
   Expect<Equal<ParseSelector<'.wrapper div.box'>, HTMLDivElement>>,
+  Expect<Equal<ParseSelector<'div.box >'>, Element>>,
+  Expect<Equal<ParseSelector<'div.box +'>, Element>>,
+  Expect<Equal<ParseSelector<'div.box ~'>, Element>>,
+  Expect<Equal<ParseSelector<'div.box ?'>, Element>>,
   Expect<
     Equal<ParseSelector<'.wrapper div.box, .sidebar div.alert'>, HTMLDivElement>
   >,
