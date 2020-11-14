@@ -7,8 +7,9 @@
   "license": "MIT",
   "files": [
     "mod.js",
+    "mod.js.map",
     "mod.d.ts",
-    "mod.js.map"
+    "mod.d.ts.map"
   ],
   "type": "module",
   "module": "./mod.js",
