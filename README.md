@@ -89,7 +89,7 @@ querySelector('div, span') // ==> HTMLDivElement | HTMLSpanElement
 #### Web Components
 
 If you passed an unknown tag, it will fall back to `Element`,
-but you can override it my specifying concrete type.
+but you can override it by specifying concrete type.
 
 ```typescript
 import { querySelector } from 'typed-query-selector'
@@ -101,7 +101,7 @@ querySelector<MyComponent>('my-web-component') // ==> MyComponent
 
 #### Invalid selector
 
-When passing an invalid selector which will cause parsing error,
+When passing an invalid selector which causes parsing error,
 it will fall back to `Element`.
 
 ```typescript
