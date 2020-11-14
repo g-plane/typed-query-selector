@@ -32,12 +32,84 @@ querySelector('form#login', container) // ==> HTMLFormElement
 querySelectorAll('span.badge', container) // ==> NodeListOf<HTMLSpanElement>
 ```
 
-If you just want to use the selector parser itself, we exported for you:
+If you just want to use the selector parser itself, we've exported for you:
 
 ```typescript
 import type { ParseSelector } from 'typed-query-selector'
 
 type MyElement = ParseSelector<'form#login'>
+```
+
+## 💡 Supported Use Cases
+
+### With class, ID or attribute
+
+```typescript
+import { querySelector } from 'typed-query-selector'
+
+querySelector('div.container') // ==> HTMLDivElement
+
+querySelector('div#app') // ==> HTMLDivElement
+
+querySelector('input[name=username]') // ==> HTMLInputElement
+```
+
+Even mix them:
+
+```typescript
+import { querySelector } from 'typed-query-selector'
+
+querySelector('input.form-control[name=username]') // ==> HTMLInputElement
+```
+
+### Combinators
+
+```typescript
+import { querySelector } from 'typed-query-selector'
+
+querySelector('body div') // ==> HTMLDivElement
+
+querySelector('body > form') // ==> HTMLFormElement
+
+querySelector('h1 + p') // ==> HTMLParagraphElement
+
+querySelector('h2 ~ p') // ==> HTMLParagraphElement
+```
+
+### Grouping selectors
+
+```typescript
+import { querySelector } from 'typed-query-selector'
+
+querySelector('div, span') // ==> HTMLDivElement | HTMLSpanElement
+```
+
+### Fallback
+
+#### Web Components
+
+If you passed an unknown tag, it will fall back to `Element`,
+but you can override it my specifying concrete type.
+
+```typescript
+import { querySelector } from 'typed-query-selector'
+
+querySelector('my-web-component') // ==> Element
+
+querySelector<MyComponent>('my-web-component') // ==> MyComponent
+```
+
+#### Invalid selector
+
+When passing an invalid selector which will cause parsing error,
+it will fall back to `Element`.
+
+```typescript
+import { querySelector } from 'typed-query-selector'
+
+querySelector('div#app >') // ==> Element
+
+querySelector('div#app ?') // ==> Element
 ```
 
 ## 📃 License
