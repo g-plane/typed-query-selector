@@ -11,34 +11,46 @@ npm i typed-query-selector
 
 ## 🍉 Usage
 
-```typescript
-import { querySelector, querySelectorAll } from 'typed-query-selector'
+### Automatic shim
 
-querySelector('div#app') // ==> HTMLDivElement
-
-querySelector('div#app > form#login') // ==> HTMLFormElement
-
-querySelectorAll('span.badge') // ==> NodeListOf<HTMLSpanElement>
-```
-
-If you don't want to query from `document`,
-pass your base element as second parameter.
+All you need to do is to import this module,
+then the `querySelector` and `querySelectorAll` function will be enhanced.
 
 ```typescript
-import { querySelector, querySelectorAll } from 'typed-query-selector'
+import 'typed-query-selector'
 
-querySelector('form#login', container) // ==> HTMLFormElement
+document.querySelector('div#app') // ==> HTMLDivElement
 
-querySelectorAll('span.badge', container) // ==> NodeListOf<HTMLSpanElement>
+document.querySelector('div#app > form#login') // ==> HTMLFormElement
+
+document.querySelectorAll('span.badge') // ==> NodeListOf<HTMLSpanElement>
+
+anElement.querySelector('button#submit') // ==> HTMLButtonElement
 ```
+
+If you aren't going to use ES Modules you can modify your `tsconfig.json`,
+however this is NOT recommended, unless you know what you're doing.
+
+```json
+{
+  "compilerOptions": {
+    "types": ["typed-query-selector"]
+  }
+}
+```
+
+### Use the parser
 
 If you just want to use the selector parser itself, we've exported for you:
 
 ```typescript
-import type { ParseSelector } from 'typed-query-selector'
+import type { ParseSelector } from 'typed-query-selector/parser'
 
 type MyElement = ParseSelector<'form#login'>
 ```
+
+Please note that you should import `typed-query-selector/parser`, not `typed-query-selector`.
+This is safe because this import doesn't patch to the `querySelector` and `querySelectorAll` function.
 
 ## 💡 Supported Use Cases
 
