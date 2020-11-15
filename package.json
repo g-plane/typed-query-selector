@@ -7,6 +7,7 @@
   "license": "MIT",
   "files": ["*.d.ts"],
   "main": "shim.d.ts",
+  "sideEffects": false,
   "scripts": {
     "test": "tsc -p ."
   },
