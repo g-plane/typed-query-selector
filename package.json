@@ -5,19 +5,10 @@
   "repository": "g-plane/typed-query-selector",
   "version": "1.1.0",
   "license": "MIT",
-  "files": [
-    "mod.js",
-    "mod.js.map",
-    "mod.d.ts",
-    "mod.d.ts.map"
-  ],
-  "type": "module",
-  "module": "./mod.js",
-  "exports": "./mod.js",
+  "files": ["*.d.ts"],
+  "main": "shim.d.ts",
   "scripts": {
-    "prepublishOnly": "tsc -p ./tsconfig.build.json",
-    "build": "tsc -p ./tsconfig.build.json",
-    "test": "tsc -p . --noEmit"
+    "test": "tsc -p ."
   },
   "devDependencies": {
     "@gplane/tsconfig": "^3.1.0",

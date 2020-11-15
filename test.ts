@@ -1,6 +1,5 @@
 import type { Equal, Expect } from '@type-challenges/utils'
-import type { ParseSelector } from './mod'
-import { querySelector } from './mod'
+import type { ParseSelector } from './parser'
 
 type _Tests = [
   Expect<Equal<ParseSelector<''>, Element>>,
@@ -34,6 +33,6 @@ type _Tests = [
   >
 ]
 
-const el: HTMLDivElement | HTMLSpanElement | null = querySelector(
+const el: HTMLDivElement | HTMLSpanElement | null = document.querySelector(
   '.container > #sign-up-form > div#notice, span.tip'
 )

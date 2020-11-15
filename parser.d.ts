@@ -27,17 +27,3 @@ export type ParseSelector<I extends string> =
   Tags extends keyof HTMLElementTagNameMap ? HTMLElementTagNameMap[Tags] :
   Tags extends keyof SVGElementTagNameMap ? SVGElementTagNameMap[Tags] :
   Element : never : never : never
-
-export function querySelector<
-  S extends string,
-  E extends Element = ParseSelector<S>
->(selector: S, element: Element | Document = document) {
-  return element.querySelector<E>(selector)
-}
-
-export function querySelectorAll<
-  S extends string,
-  E extends Element = ParseSelector<S>
->(selector: S, element: Element | Document = document) {
-  return element.querySelectorAll<E>(selector)
-}
