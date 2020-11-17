@@ -124,6 +124,10 @@ document.querySelector('div#app >') // ==> Element
 document.querySelector('div#app ?') // ==> Element
 ```
 
+## Related
+
+- [Type Gymnastics](https://github.com/g-plane/type-gymnastics) - Collection of wonderful TypeScript type gymnastics code snippets.
+
 ## 📃 License
 
 MIT License
