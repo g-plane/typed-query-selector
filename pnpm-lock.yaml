@@ -1,25 +1,25 @@
 devDependencies:
-  '@gplane/tsconfig': 3.1.0
+  '@gplane/tsconfig': 4.0.0
   '@type-challenges/utils': 0.1.1
-  typescript: 4.1.1-rc
+  typescript: 4.1.2
 lockfileVersion: 5.2
 packages:
-  /@gplane/tsconfig/3.1.0:
+  /@gplane/tsconfig/4.0.0:
     dev: true
     resolution:
-      integrity: sha512-w4UNvSwwo9qzBwz9jC1Do0R/2Wq3kNbChdZ0OFP7UXNmScSLa2z5s738Q0jsRrSYKw3zLoVKwuN2WevGGCfJwA==
+      integrity: sha512-Jjtuaxv1J4Wu10o0jxWKmkWdYHuJF9fh0ThiTMz/emsldJm5TjbZHIBTtI8mtGMhiLNHBtsMjZf7tQYOvJpWtQ==
   /@type-challenges/utils/0.1.1:
     dev: true
     resolution:
       integrity: sha512-A7ljYfBM+FLw+NDyuYvGBJiCEV9c0lPWEAdzfOAkb3JFqfLl0Iv/WhWMMARHiRKlmmiD1g8gz/507yVvHdQUYA==
-  /typescript/4.1.1-rc:
+  /typescript/4.1.2:
     dev: true
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-tgNcFrLIjlaMWEc7bKC0bxLNIt8BIAauY/HLUOQDyTP75HGskETtXOt46x4EKAHRKhWVLMc7yM02puTHa/yhCA==
+      integrity: sha512-thGloWsGH3SOxv1SoY7QojKi0tc+8FnOmiarEGMbd/lar7QOEd3hvlx3Fp5y6FlDUGl9L+pd4n2e+oToGMmhRQ==
 specifiers:
-  '@gplane/tsconfig': ^3.1.0
+  '@gplane/tsconfig': ^4.0.0
   '@type-challenges/utils': ^0.1.1
-  typescript: ^4.1.1-rc
+  typescript: ^4.1.2
