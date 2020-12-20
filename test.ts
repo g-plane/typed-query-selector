@@ -36,3 +36,5 @@ type _Tests = [
 const el: HTMLDivElement | HTMLSpanElement | null = document.querySelector(
   '.container > #sign-up-form > div#notice, span.tip'
 )
+
+const link: HTMLAnchorElement | null = document.querySelector< HTMLAnchorElement>(prompt())
