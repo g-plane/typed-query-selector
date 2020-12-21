@@ -30,6 +30,9 @@ type _Tests = [
       ParseSelector<'.container > #sign-up-form > div#notice, span.tip'>,
       HTMLDivElement | HTMLSpanElement
     >
+  >,
+  Expect<
+    Equal<ParseSelector<'link[type="application/atom+xml"]'>, HTMLLinkElement>
   >
 ]
 

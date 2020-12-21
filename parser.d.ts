@@ -12,13 +12,13 @@ type Split<S, R = never> = S extends `${infer Left},${infer Right}`
 
 type Preprocess<I extends string> = I extends `${infer L}, ${infer R}`
   ? Preprocess<`${L},${R}`>
+  : I extends `${infer L}[${string}]${infer R}`
+  ? Preprocess<`${L}${R}`>
   : Trim<I>
 
 type Postprocess<I> = I extends `${infer Tag}.${infer _}`
   ? Postprocess<Tag>
   : I extends `${infer Tag}#${infer _}`
-  ? Postprocess<Tag>
-  : I extends `${infer Tag}[${infer _}`
   ? Postprocess<Tag>
   : I
 
