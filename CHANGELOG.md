@@ -1,5 +1,14 @@
 # Change Log
 
+## v2.1.1
+
+- Fixed more kinds of whitespace characters in selector.
+- Fixed combinator characters in attribute of selector.
+
+## v2.1.0
+
+- Added `types` field to package.json.
+
 ## v2.0.0
 
 - **Breaking change**: `querySelector` and `querySelectorAll` from this package are removed.
