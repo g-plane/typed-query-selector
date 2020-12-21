@@ -13,6 +13,16 @@ type _Tests = [
   Expect<Equal<ParseSelector<'h1 ~ p'>, HTMLParagraphElement>>,
   Expect<Equal<ParseSelector<'h1 + p'>, HTMLParagraphElement>>,
   Expect<Equal<ParseSelector<' h2 '>, HTMLHeadingElement>>,
+  Expect<Equal<ParseSelector<'\nh2 '>, HTMLHeadingElement>>,
+  Expect<Equal<ParseSelector<'\r\nh2 '>, HTMLHeadingElement>>,
+  Expect<
+    Equal<
+      ParseSelector<`
+    h2
+  `>,
+      HTMLHeadingElement
+    >
+  >,
   Expect<Equal<ParseSelector<'div, span'>, HTMLDivElement | HTMLSpanElement>>,
   Expect<Equal<ParseSelector<'span.text-center'>, HTMLSpanElement>>,
   Expect<Equal<ParseSelector<'button#submit'>, HTMLButtonElement>>,

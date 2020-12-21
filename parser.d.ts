@@ -1,6 +1,7 @@
-type Trim<S extends string> = S extends `${infer T} `
+type Whitespace = ' ' | '\n' | '\r' | '\f'
+type Trim<S extends string> = S extends `${infer T}${Whitespace}`
   ? Trim<T>
-  : S extends ` ${infer T}`
+  : S extends `${Whitespace}${infer T}`
   ? Trim<T>
   : S
 
