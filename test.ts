@@ -43,7 +43,8 @@ type _Tests = [
   >,
   Expect<
     Equal<ParseSelector<'link[type="application/atom+xml"]'>, HTMLLinkElement>
-  >
+  >,
+  Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>
 ]
 
 const el: HTMLDivElement | HTMLSpanElement | null = document.querySelector(
