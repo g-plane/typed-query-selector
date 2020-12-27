@@ -45,6 +45,8 @@ type _Tests = [
     Equal<ParseSelector<'link[type="application/atom+xml"]'>, HTMLLinkElement>
   >,
   Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>
+  Expect<Equal<ParseSelector<'input[aria-label="Full name"]'>, HTMLInputElement>>,
+  Expect<Equal<ParseSelector<'input:not([type=email])'>, HTMLInputElement>>,
 ]
 
 const el: HTMLDivElement | HTMLSpanElement | null = document.querySelector(
