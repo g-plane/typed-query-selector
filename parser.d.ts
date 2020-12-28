@@ -7,6 +7,26 @@ type Trim<S extends string> = S extends `${infer T}${Whitespace}`
 
 type Combinators = ' ' | '>' | '~' | '+'
 
+type PseudoClassesFirstChar =
+  | 'a'
+  | 'b'
+  | 'c'
+  | 'd'
+  | 'e'
+  | 'f'
+  | 'h'
+  | 'i'
+  | 'l'
+  | 'n'
+  | 'o'
+  | 'p'
+  | 'r'
+  | 's'
+  | 't'
+  | 'u'
+  | 'v'
+  | 'w'
+
 type Split<S, R = never> = S extends `${infer Left},${infer Right}`
   ? Split<Right, R | Left>
   : R | S
@@ -20,6 +40,8 @@ type Preprocess<I extends string> = I extends `${infer L}, ${infer R}`
 type Postprocess<I> = I extends `${infer Tag}.${infer _}`
   ? Postprocess<Tag>
   : I extends `${infer Tag}#${infer _}`
+  ? Postprocess<Tag>
+  : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
   ? Postprocess<Tag>
   : I
 
