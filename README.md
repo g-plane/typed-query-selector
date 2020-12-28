@@ -54,7 +54,7 @@ This is safe because this import doesn't patch to the `querySelector` and `query
 
 ## 💡 Supported Use Cases
 
-### With class, ID or attribute
+### With class, ID, pseudo class or attribute
 
 ```typescript
 import 'typed-query-selector'
@@ -64,6 +64,8 @@ document.querySelector('div.container') // ==> HTMLDivElement
 document.querySelector('div#app') // ==> HTMLDivElement
 
 document.querySelector('input[name=username]') // ==> HTMLInputElement
+
+document.querySelector('input:first-child') // ==> HTMLInputElement
 ```
 
 Even mix them:
