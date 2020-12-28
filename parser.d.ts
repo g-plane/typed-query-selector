@@ -37,9 +37,9 @@ type Preprocess<I extends string> = I extends `${infer L}, ${infer R}`
   ? Preprocess<`${L}${R}`>
   : Trim<I>
 
-type Postprocess<I> = I extends `${infer Tag}.${infer _}`
+type Postprocess<I> = I extends `${infer Tag}.${string}`
   ? Postprocess<Tag>
-  : I extends `${infer Tag}#${infer _}`
+  : I extends `${infer Tag}#${string}`
   ? Postprocess<Tag>
   : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
   ? Postprocess<Tag>
@@ -48,7 +48,7 @@ type Postprocess<I> = I extends `${infer Tag}.${infer _}`
 export type ParseSelector<I extends string> = string extends I
   ? Element
   : Preprocess<I> extends infer I
-  ? I extends `${infer _}${Combinators}${infer Right}`
+  ? I extends `${string}${Combinators}${infer Right}`
     ? ParseSelector<Right>
     : Split<I> extends infer Tags
     ? Postprocess<Tags> extends infer Tags
