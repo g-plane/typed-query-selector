@@ -45,6 +45,9 @@ type _Tests = [
   Expect<
     Equal<ParseSelector<'link[type="application/atom+xml"]'>, HTMLLinkElement>
   >,
+  Expect<Equal<ParseSelector<'input[aria-label="Full name"]'>, HTMLInputElement>>,
+  Expect<Equal<ParseSelector<'input:last-child'>, HTMLInputElement>>,
+  Expect<Equal<ParseSelector<'input:not([type=email])'>, HTMLInputElement>>,
   Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>
 ]
 
