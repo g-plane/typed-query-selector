@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.2.1
+
+- Fixed multiline with starting tabs or spaces.
+
 ## v2.2.0
 
 - Support tabs in selector string.

@@ -31,7 +31,7 @@ type Split<S, R = never> = S extends `${infer Left},${infer Right}`
   ? Split<Right, R | Left>
   : R | S
 
-type Preprocess<I extends string> = I extends `${infer L}, ${infer R}`
+type Preprocess<I extends string> = I extends `${infer L},${Whitespace}${infer R}`
   ? Preprocess<`${L},${R}`>
   : I extends `${infer L}[${string}]${infer R}`
   ? Preprocess<`${L}${R}`>
