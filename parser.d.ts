@@ -1,4 +1,4 @@
-type Whitespace = ' ' | '\n' | '\r' | '\f'
+type Whitespace = ' ' | '\n' | '\r' | '\f' | '\t'
 type Trim<S extends string> = S extends `${infer T}${Whitespace}`
   ? Trim<T>
   : S extends `${Whitespace}${infer T}`

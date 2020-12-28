@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- Support tabs in selector string.
+
 ## v2.1.1
 
 - Fixed more kinds of whitespace characters in selector.

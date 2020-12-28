@@ -13,6 +13,7 @@ type _Tests = [
   Expect<Equal<ParseSelector<'h1 ~ p'>, HTMLParagraphElement>>,
   Expect<Equal<ParseSelector<'h1 + p'>, HTMLParagraphElement>>,
   Expect<Equal<ParseSelector<' h2 '>, HTMLHeadingElement>>,
+  Expect<Equal<ParseSelector<'\th2 '>, HTMLHeadingElement>>,
   Expect<Equal<ParseSelector<'\nh2 '>, HTMLHeadingElement>>,
   Expect<Equal<ParseSelector<'\r\nh2 '>, HTMLHeadingElement>>,
   Expect<
