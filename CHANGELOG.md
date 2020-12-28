@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.2.0
+
 - Support tabs in selector string.
 - Support pseudo-classes in selector.
 
