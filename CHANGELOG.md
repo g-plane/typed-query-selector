@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed arbitrary content in attribute.
+
 ## v2.2.1
 
 - Fixed multiline with starting tabs or spaces.

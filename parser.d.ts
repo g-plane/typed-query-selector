@@ -31,9 +31,17 @@ type Split<S, R = never> = S extends `${infer Left},${infer Right}`
   ? Split<Right, R | Left>
   : R | S
 
-type Preprocess<I extends string> = I extends `${infer L},${Whitespace}${infer R}`
+type Quotes = '"' | "'"
+
+type Preprocess<
+  I extends string
+> = I extends `${infer L},${Whitespace}${infer R}`
   ? Preprocess<`${L},${R}`>
-  : I extends `${infer L}[${string}]${infer R}`
+  : I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
+  ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}${Quotes}${string}${Quotes}${infer R}` // remove quoted content in attribute
+  ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}[${string}]${infer R}` // remove attribute
   ? Preprocess<`${L}${R}`>
   : Trim<I>
 
