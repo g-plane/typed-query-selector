@@ -36,26 +36,24 @@ type Quotes = '"' | "'"
 // DO NOT use union type like `${infer L},${Whitespace}${infer R}` here,
 // or it may cause OOM when running tsc in downstream projects.
 type PreprocessGrouping<I extends string> = I extends `${infer L}, ${infer R}`
-  ? Preprocess<`${L},${R}`>
+  ? PreprocessGrouping<`${L},${R}`>
   : I extends `${infer L},\n${infer R}`
-  ? Preprocess<`${L},${R}`>
+  ? PreprocessGrouping<`${L},${R}`>
   : I extends `${infer L},\r${infer R}`
-  ? Preprocess<`${L},${R}`>
+  ? PreprocessGrouping<`${L},${R}`>
   : I extends `${infer L},\f${infer R}`
-  ? Preprocess<`${L},${R}`>
+  ? PreprocessGrouping<`${L},${R}`>
   : I extends `${infer L},\t${infer R}`
-  ? Preprocess<`${L},${R}`>
+  ? PreprocessGrouping<`${L},${R}`>
   : I
 
-type Preprocess<I extends string> = PreprocessGrouping<I> extends infer I
-  ? I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
-    ? Preprocess<`${L}${R}`>
-    : I extends `${infer L}${Quotes}${string}${Quotes}${infer R}` // remove quoted content in attribute
-    ? Preprocess<`${L}${R}`>
-    : I extends `${infer L}[${string}]${infer R}` // remove attribute
-    ? Preprocess<`${L}${R}`>
-    : Trim<I>
-  : I
+type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
+  ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}${Quotes}${string}${Quotes}${infer R}` // remove quoted content in attribute
+  ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}[${string}]${infer R}` // remove attribute
+  ? Preprocess<`${L}${R}`>
+  : Trim<I>
 
 type Postprocess<I> = I extends `${infer Tag}.${string}`
   ? Postprocess<Tag>
@@ -67,7 +65,7 @@ type Postprocess<I> = I extends `${infer Tag}.${string}`
 
 export type ParseSelector<I extends string> = string extends I
   ? Element
-  : Preprocess<I> extends infer I
+  : Preprocess<PreprocessGrouping<I>> extends infer I
   ? I extends `${string}${Combinators}${infer Right}`
     ? ParseSelector<Right>
     : Split<I> extends infer Tags

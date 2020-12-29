@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.2.3
+
+- Refactor types.
+
 ## v2.2.2
 
 - Fixed possible OOM.
