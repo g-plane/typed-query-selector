@@ -47,6 +47,12 @@ type _Tests = [
   >,
   Expect<
     Equal<
+      ParseSelector<`\n  input,\n  button.js-comment-cancel-button\n  `>,
+      HTMLInputElement | HTMLButtonElement
+    >
+  >,
+  Expect<
+    Equal<
       ParseSelector<'.container > #sign-up-form > div#notice, span.tip'>,
       HTMLDivElement | HTMLSpanElement
     >
