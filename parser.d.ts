@@ -45,7 +45,7 @@ type Postprocess<I> = I extends `${infer Tag}.${string}`
   ? Postprocess<Tag>
   : I
 
-export type ParseSelector<I extends string, Fallback extends Element> = string extends I
+export type ParseSelector<I extends string, Fallback extends Element = Element> = string extends I
   ? Fallback
   : Preprocess<I> extends infer I
   ? I extends `${string}${Combinators}${infer Right}`
