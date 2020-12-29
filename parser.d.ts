@@ -33,17 +33,29 @@ type Split<S, R = never> = S extends `${infer Left},${infer Right}`
 
 type Quotes = '"' | "'"
 
-type Preprocess<
-  I extends string
-> = I extends `${infer L},${Whitespace}${infer R}`
+// DO NOT use union type like `${infer L},${Whitespace}${infer R}` here,
+// or it may cause OOM when running tsc in downstream projects.
+type PreprocessGrouping<I extends string> = I extends `${infer L}, ${infer R}`
   ? Preprocess<`${L},${R}`>
-  : I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
-  ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}${Quotes}${string}${Quotes}${infer R}` // remove quoted content in attribute
-  ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}[${string}]${infer R}` // remove attribute
-  ? Preprocess<`${L}${R}`>
-  : Trim<I>
+  : I extends `${infer L},\n${infer R}`
+  ? Preprocess<`${L},${R}`>
+  : I extends `${infer L},\r${infer R}`
+  ? Preprocess<`${L},${R}`>
+  : I extends `${infer L},\f${infer R}`
+  ? Preprocess<`${L},${R}`>
+  : I extends `${infer L},\t${infer R}`
+  ? Preprocess<`${L},${R}`>
+  : I
+
+type Preprocess<I extends string> = PreprocessGrouping<I> extends infer I
+  ? I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
+    ? Preprocess<`${L}${R}`>
+    : I extends `${infer L}${Quotes}${string}${Quotes}${infer R}` // remove quoted content in attribute
+    ? Preprocess<`${L}${R}`>
+    : I extends `${infer L}[${string}]${infer R}` // remove attribute
+    ? Preprocess<`${L}${R}`>
+    : Trim<I>
+  : I
 
 type Postprocess<I> = I extends `${infer Tag}.${string}`
   ? Postprocess<Tag>
