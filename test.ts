@@ -24,6 +24,15 @@ type _Tests = [
       HTMLHeadingElement
     >
   >,
+  Expect<
+    Equal<
+      ParseSelector<`
+    input,
+    button
+  `>,
+      HTMLInputElement | HTMLButtonElement
+    >
+  >,
   Expect<Equal<ParseSelector<'div, span'>, HTMLDivElement | HTMLSpanElement>>,
   Expect<Equal<ParseSelector<'span.text-center'>, HTMLSpanElement>>,
   Expect<Equal<ParseSelector<'button#submit'>, HTMLButtonElement>>,
