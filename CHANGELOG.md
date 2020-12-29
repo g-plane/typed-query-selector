@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.2.2
+
 - Fixed possible OOM.
 - Fixed arbitrary content in attribute.
 
