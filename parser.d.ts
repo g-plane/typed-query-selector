@@ -45,8 +45,8 @@ type Postprocess<I> = I extends `${infer Tag}.${string}`
   ? Postprocess<Tag>
   : I
 
-export type ParseSelector<I extends string> = string extends I
-  ? Element
+export type ParseSelector<I extends string, Fallback extends Element> = string extends I
+  ? Fallback
   : Preprocess<I> extends infer I
   ? I extends `${string}${Combinators}${infer Right}`
     ? ParseSelector<Right>
@@ -56,7 +56,7 @@ export type ParseSelector<I extends string> = string extends I
         ? HTMLElementTagNameMap[Tags]
         : Tags extends keyof SVGElementTagNameMap
         ? SVGElementTagNameMap[Tags]
-        : Element
+        : Fallback
       : never
     : never
   : never
