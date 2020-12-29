@@ -59,6 +59,7 @@ type _Tests = [
   >,
   Expect<Equal<ParseSelector<'input:last-child'>, HTMLInputElement>>,
   Expect<Equal<ParseSelector<'input:not([type=email])'>, HTMLInputElement>>,
+  Expect<Equal<ParseSelector<'textarea[name="comment[body]"]'>, HTMLInputElement>>,
   Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>
 ]
 
