@@ -60,7 +60,7 @@ type _Tests = [
   Expect<Equal<ParseSelector<'input:last-child'>, HTMLInputElement>>,
   Expect<Equal<ParseSelector<'input:not([type=email])'>, HTMLInputElement>>,
   Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>,
-  Expect<Equal<ParseSelector<'.button', HTMLButtonElement>, HTMLButtonElement>> // Allow customization of default
+  Expect<Equal<ParseSelector<'.button', HTMLButtonElement>, HTMLButtonElement>>, // Allow customization of default
   Expect<Equal<ParseSelector<'input.button', HTMLButtonElement>, HTMLInputElement>> // The fallback should never override the parsed type
 ]
 
