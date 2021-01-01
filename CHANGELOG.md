@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.2.4
+
 - Process quotes separately.
 - Added simple selector syntax check.
 
