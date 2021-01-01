@@ -86,13 +86,17 @@ type _Tests = [
   Expect<
     Equal<ParseSelector<"textarea[name='comment[\\']']">, HTMLTextAreaElement>
   >,
-  Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>
+  Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>,
+  Expect<Equal<ParseSelector<'div.'>, Element>>,
+  Expect<Equal<ParseSelector<'div#'>, Element>>,
+  Expect<Equal<ParseSelector<'div:'>, Element>>,
+  Expect<Equal<ParseSelector<'div,'>, Element>>,
 ]
 
 const el: HTMLDivElement | HTMLSpanElement | null = document.querySelector(
-  '.container > #sign-up-form > div#notice, span.tip'
+  '.container > #sign-up-form > div#notice, span.tip',
 )
 
 const link: HTMLAnchorElement | null = document.querySelector<HTMLAnchorElement>(
-  prompt()!
+  prompt()!,
 )

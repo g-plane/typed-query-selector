@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Process quotes separately.
+- Added simple selector syntax check.
 
 ## v2.2.3
 

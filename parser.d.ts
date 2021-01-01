@@ -27,7 +27,9 @@ type PseudoClassesFirstChar =
   | 'v'
   | 'w'
 
-type Split<S, R = never> = S extends `${infer Left},${infer Right}`
+type Split<S, R = never> = S extends `${string},` // invalid selector
+  ? unknown
+  : S extends `${infer Left},${infer Right}`
   ? Split<Right, R | Left>
   : R | S
 
@@ -57,7 +59,11 @@ type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` 
   ? Preprocess<`${L}${R}`>
   : Trim<I>
 
-type Postprocess<I> = I extends `${infer Tag}.${string}`
+type Postprocess<I> = I extends `${string}.` // invalid selector
+  ? unknown
+  : I extends `${string}#` // invalid selector
+  ? unknown
+  : I extends `${infer Tag}.${string}`
   ? Postprocess<Tag>
   : I extends `${infer Tag}#${string}`
   ? Postprocess<Tag>
