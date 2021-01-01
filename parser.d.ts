@@ -49,7 +49,9 @@ type PreprocessGrouping<I extends string> = I extends `${infer L}, ${infer R}`
 
 type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
   ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}${Quotes}${string}${Quotes}${infer R}` // remove quoted content in attribute
+  : I extends `${infer L}"${string}"${infer R}` // remove quoted content in attribute
+  ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
   ? Preprocess<`${L}${R}`>
   : I extends `${infer L}[${string}]${infer R}` // remove attribute
   ? Preprocess<`${L}${R}`>

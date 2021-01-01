@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Process quotes separately.
+
 ## v2.2.3
 
 - Refactor types.

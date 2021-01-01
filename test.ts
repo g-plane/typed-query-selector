@@ -63,6 +63,9 @@ type _Tests = [
   Expect<
     Equal<ParseSelector<'input[aria-label="Full name"]'>, HTMLInputElement>
   >,
+  Expect<
+    Equal<ParseSelector<`input[aria-label='Full name']`>, HTMLInputElement>
+  >,
   Expect<Equal<ParseSelector<'input:last-child'>, HTMLInputElement>>,
   Expect<Equal<ParseSelector<'input:not([type=email])'>, HTMLInputElement>>,
   Expect<
