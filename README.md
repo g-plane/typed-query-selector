@@ -6,7 +6,7 @@ by leveraging TypeScript 4.1 template literal type.
 ## 💿 Install
 
 ```
-npm i typed-query-selector
+npm i -D typed-query-selector
 ```
 
 ## 🍉 Usage
@@ -15,6 +15,8 @@ npm i typed-query-selector
 
 All you need to do is to import this module,
 then the `querySelector` and `querySelectorAll` function will be enhanced.
+
+This module only works at type level and doesn't have any runtime code.
 
 ```typescript
 import 'typed-query-selector'
