@@ -55,8 +55,6 @@ type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` 
   ? Preprocess<`${L}]${R}`>
   : I extends `${infer L}'${string}']${infer R}` // remove quoted content in attribute
   ? Preprocess<`${L}]${R}`>
-  : I extends `${infer L}[${string}]${infer R}` // remove attribute
-  ? Preprocess<`${L}${R}`>
   : Trim<I>
 
 type Postprocess<I> = I extends `${string}.` // invalid selector
@@ -69,6 +67,8 @@ type Postprocess<I> = I extends `${string}.` // invalid selector
   ? Postprocess<Tag>
   : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
   ? Postprocess<Tag>
+  : I extends `${infer L}[${string}]${infer R}` // remove attribute
+  ? Postprocess<`${L}${R}`>
   : I
 
 export type ParseSelectorToTagName<I extends string> = Preprocess<
