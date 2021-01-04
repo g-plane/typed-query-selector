@@ -57,7 +57,7 @@ type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` 
   ? Preprocess<`${L}${R}`>
   : I extends `${infer L}[${string}]${infer R}` // remove attribute
   ? Preprocess<`${L}${R}`>
-  : Trim<I>
+  : I
 
 type Postprocess<I> = I extends `${string}.` // invalid selector
   ? unknown
@@ -73,15 +73,15 @@ type Postprocess<I> = I extends `${string}.` // invalid selector
   ? Postprocess<R>
   : I
 
-export type ParseSelectorToTagName<I extends string> = Preprocess<
-  PreprocessGrouping<I>
-> extends infer I
+export type ParseSelectorToTagName<I extends string> = Trim<I> extends infer I
   ? I extends ''
     ? unknown
-    : I extends `${string}${Combinators}${infer Right}`
-    ? ParseSelectorToTagName<Right>
-    : Split<I> extends infer Tags
-    ? Postprocess<Tags>
+    : Preprocess<PreprocessGrouping<I>> extends infer I
+    ? I extends `${string}${Combinators}${infer Right}`
+      ? ParseSelectorToTagName<Right>
+      : Split<I> extends infer Tags
+      ? Postprocess<Tags>
+      : never
     : never
   : never
 
