@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Exposed `ParseSelectorToTagName` type.
+
 ## v2.2.4
 
 - Process quotes separately.

@@ -51,10 +51,10 @@ type PreprocessGrouping<I extends string> = I extends `${infer L}, ${infer R}`
 
 type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
   ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}"${string}"${infer R}` // remove quoted content in attribute
-  ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
-  ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}"${string}"]${infer R}` // remove quoted content in attribute
+  ? Preprocess<`${L}]${R}`>
+  : I extends `${infer L}'${string}']${infer R}` // remove quoted content in attribute
+  ? Preprocess<`${L}]${R}`>
   : I extends `${infer L}[${string}]${infer R}` // remove attribute
   ? Preprocess<`${L}${R}`>
   : Trim<I>
@@ -71,18 +71,22 @@ type Postprocess<I> = I extends `${string}.` // invalid selector
   ? Postprocess<Tag>
   : I
 
-export type ParseSelector<I extends string> = string extends I
-  ? Element
-  : Preprocess<PreprocessGrouping<I>> extends infer I
+export type ParseSelectorToTagName<I extends string> = Preprocess<
+  PreprocessGrouping<I>
+> extends infer I
   ? I extends `${string}${Combinators}${infer Right}`
-    ? ParseSelector<Right>
+    ? ParseSelectorToTagName<Right>
     : Split<I> extends infer Tags
-    ? Postprocess<Tags> extends infer Tags
-      ? Tags extends keyof HTMLElementTagNameMap
-        ? HTMLElementTagNameMap[Tags]
-        : Tags extends keyof SVGElementTagNameMap
-        ? SVGElementTagNameMap[Tags]
-        : Element
-      : never
+    ? Postprocess<Tags>
     : never
+  : never
+
+export type ParseSelector<
+  I extends string
+> = ParseSelectorToTagName<I> extends infer Tags
+  ? Tags extends keyof HTMLElementTagNameMap
+    ? HTMLElementTagNameMap[Tags]
+    : Tags extends keyof SVGElementTagNameMap
+    ? SVGElementTagNameMap[Tags]
+    : Element
   : never
