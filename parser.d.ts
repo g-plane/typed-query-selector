@@ -55,6 +55,8 @@ type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` 
   ? Preprocess<`${L}${R}`>
   : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
   ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}~=${infer R}` // `~=` is allowed in attribute, but `~` has conflict with combinators
+  ? Preprocess<`${L}=${R}`> // so we treat it as normal `=`
   : Trim<I>
 
 type Postprocess<I> = I extends `${string}.` // invalid selector

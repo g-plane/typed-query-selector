@@ -61,6 +61,13 @@ type _Tests = [
       HTMLDivElement | HTMLSpanElement
     >
   >,
+  Expect<Equal<ParseSelector<'div[data-key~=value]'>, HTMLDivElement>>,
+  Expect<Equal<ParseSelector<'div[data-key|=value]'>, HTMLDivElement>>,
+  Expect<Equal<ParseSelector<'div[data-key^=value]'>, HTMLDivElement>>,
+  Expect<Equal<ParseSelector<'div[data-key$=value]'>, HTMLDivElement>>,
+  Expect<Equal<ParseSelector<'div[data-key*=value]'>, HTMLDivElement>>,
+  Expect<Equal<ParseSelector<'div[data-key="value"i]'>, HTMLDivElement>>,
+  Expect<Equal<ParseSelector<'div[data-key="value"s]'>, HTMLDivElement>>,
   Expect<
     Equal<ParseSelector<'link[type="application/atom+xml"]'>, HTMLLinkElement>
   >,
