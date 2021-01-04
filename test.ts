@@ -3,6 +3,7 @@ import type { ParseSelector } from './parser'
 
 type _Tests = [
   Expect<Equal<ParseSelector<''>, Element>>,
+  Expect<Equal<ParseSelector<'*'>, Element>>,
   Expect<Equal<ParseSelector<'my-web-component'>, Element>>,
   Expect<Equal<ParseSelector<'.text-center'>, Element>>,
   Expect<Equal<ParseSelector<'#submit'>, Element>>,
