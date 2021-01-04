@@ -3,7 +3,8 @@
 ## Unreleased
 
 - Exposed `ParseSelectorToTagName` type.
-- Treat empty string as parsing error.
+- Treat empty string as syntax error.
+- Treat empty attribute `[]` as syntax error.
 - Added namespace prefix support.
 
 ## v2.2.4
