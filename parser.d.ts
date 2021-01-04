@@ -55,8 +55,8 @@ type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` 
   ? Preprocess<`${L}${R}`>
   : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
   ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}~=${infer R}` // `~=` is allowed in attribute, but `~` has conflict with combinators
-  ? Preprocess<`${L}=${R}`> // so we treat it as normal `=`
+  : I extends `${infer L}[${string}]${infer R}` // remove attribute
+  ? Preprocess<`${L}${R}`>
   : Trim<I>
 
 type Postprocess<I> = I extends `${string}.` // invalid selector
@@ -69,8 +69,6 @@ type Postprocess<I> = I extends `${string}.` // invalid selector
   ? Postprocess<Tag>
   : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
   ? Postprocess<Tag>
-  : I extends `${infer L}[${string}]${infer R}` // remove attribute
-  ? Postprocess<`${L}${R}`>
   : I extends `${string}|${infer R}` // namespace prefix
   ? Postprocess<R>
   : I
