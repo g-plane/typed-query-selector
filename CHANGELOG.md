@@ -4,6 +4,7 @@
 
 - Exposed `ParseSelectorToTagName` type.
 - Treat empty string as parsing error.
+- Added namespace prefix support.
 
 ## v2.2.4
 

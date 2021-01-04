@@ -69,6 +69,8 @@ type Postprocess<I> = I extends `${string}.` // invalid selector
   ? Postprocess<Tag>
   : I extends `${infer L}[${string}]${infer R}` // remove attribute
   ? Postprocess<`${L}${R}`>
+  : I extends `${string}|${infer R}` // namespace prefix
+  ? Postprocess<R>
   : I
 
 export type ParseSelectorToTagName<I extends string> = Preprocess<
