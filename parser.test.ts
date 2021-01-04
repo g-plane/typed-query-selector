@@ -1,7 +1,9 @@
 import type { Equal, Expect } from '@type-challenges/utils'
-import type { ParseSelector } from './parser'
+import type { ParseSelector, ParseSelectorToTagName } from './parser'
 
 type _Tests = [
+  Expect<Equal<ParseSelectorToTagName<''>, unknown>>,
+  Expect<Equal<ParseSelectorToTagName<'*'>, '*'>>,
   Expect<Equal<ParseSelector<''>, Element>>,
   Expect<Equal<ParseSelector<'*'>, Element>>,
   Expect<Equal<ParseSelector<string>, Element>>,

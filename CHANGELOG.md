@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Exposed `ParseSelectorToTagName` type.
+- Treat empty string as parsing error.
 
 ## v2.2.4
 

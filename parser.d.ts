@@ -74,7 +74,9 @@ type Postprocess<I> = I extends `${string}.` // invalid selector
 export type ParseSelectorToTagName<I extends string> = Preprocess<
   PreprocessGrouping<I>
 > extends infer I
-  ? I extends `${string}${Combinators}${infer Right}`
+  ? I extends ''
+    ? unknown
+    : I extends `${string}${Combinators}${infer Right}`
     ? ParseSelectorToTagName<Right>
     : Split<I> extends infer Tags
     ? Postprocess<Tags>
