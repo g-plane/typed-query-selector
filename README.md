@@ -68,6 +68,9 @@ That's all. If you pass an invalid selector,
 because it returns `never`, TypeScript will prevent you from
 accessing properties/methods on element or using element at somewhere.
 
+Note that it doesn't guarantee that it can detect every kind of syntax errors,
+since such parser will become very complex and compilation performance may go bad.
+
 ### Use the parser
 
 If you just want to use the selector parser itself, we've exported for you:
