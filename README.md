@@ -158,6 +158,17 @@ document.querySelector('div#app >') // ==> Element
 document.querySelector('div#app ?') // ==> Element
 ```
 
+However, if you're using strict mode,
+all `querySelector` calls above will return `never` type.
+This can stop you from misusing it.
+
+```ts
+import 'typed-query-selector/strict'
+
+const el = document.querySelector('div#app >')
+el.className // TypeScript will report error when compiling
+```
+
 ## 🔩 Technical Details
 
 ### Why returns `never` in strict mode?
