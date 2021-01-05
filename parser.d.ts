@@ -27,11 +27,11 @@ type PseudoClassesFirstChar =
   | 'v'
   | 'w'
 
-type Split<S, R = never> = S extends `${string},` // invalid selector
+type Split<S extends string> = S extends `${string},` // invalid selector
   ? unknown
   : S extends `${infer Left},${infer Right}`
-  ? Split<Right, R | Left>
-  : R | S
+  ? [Left, ...Split<Right>]
+  : [S]
 
 type Quotes = '"' | "'"
 
@@ -61,38 +61,53 @@ type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` 
   ? Preprocess<`${L}${R}`>
   : I
 
-type Postprocess<I> = I extends `${string}.` // invalid selector
+/** Check whether each tag is valid or not. */
+type Postprocess<Tags extends string[], R = []> = Tags extends []
+  ? R
+  : Tags extends [infer H, ...infer Rest]
+  ? PostprocessEach<H> extends infer T
+    ? unknown extends T
+      ? unknown
+      : Postprocess<Rest, [...R, T]>
+    : never
+  : Tags
+/** Postprocess each tag with simple validation. */
+type PostprocessEach<I> = I extends `${string}.` // invalid selector
   ? unknown
   : I extends `${string}#` // invalid selector
   ? unknown
   : I extends `${infer Tag}.${string}`
-  ? Postprocess<Tag>
+  ? PostprocessEach<Tag>
   : I extends `${infer Tag}#${string}`
-  ? Postprocess<Tag>
+  ? PostprocessEach<Tag>
   : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
-  ? Postprocess<Tag>
+  ? PostprocessEach<Tag>
   : I extends `${string}|${infer R}` // namespace prefix
-  ? Postprocess<R>
+  ? PostprocessEach<R>
   : I
 
-export type ParseSelectorToTagName<I extends string> = Trim<I> extends infer I
+/**
+ * Internal type.
+ * Use at your own risk, since we don't guarantee its signature and stability.
+ */
+export type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
   ? I extends ''
     ? unknown
     : Preprocess<PreprocessGrouping<I>> extends infer I
     ? I extends `${string}${Combinators}${infer Right}`
-      ? ParseSelectorToTagName<Right>
-      : Split<I> extends infer Tags
-      ? Postprocess<Tags>
-      : never
+      ? ParseSelectorToTagNames<Right>
+      : Postprocess<Split<I>>
     : never
   : never
 
-export type ParseSelector<
-  I extends string
-> = ParseSelectorToTagName<I> extends infer Tags
-  ? Tags extends keyof HTMLElementTagNameMap
-    ? HTMLElementTagNameMap[Tags]
-    : Tags extends keyof SVGElementTagNameMap
-    ? SVGElementTagNameMap[Tags]
-    : Element
-  : never
+export type ParseSelector<I extends string> = TagNameToElement<
+  ParseSelectorToTagNames<I>[number]
+>
+
+export type TagNameToElement<
+  Tag extends string
+> = Tag extends keyof HTMLElementTagNameMap
+  ? HTMLElementTagNameMap[Tag]
+  : Tag extends keyof SVGElementTagNameMap
+  ? SVGElementTagNameMap[Tag]
+  : Element

@@ -2,10 +2,10 @@
 
 ## Unreleased
 
-- Exposed `ParseSelectorToTagName` type.
 - Treat empty string as syntax error.
 - Treat empty attribute `[]` as syntax error.
 - Added namespace prefix support.
+- Added strict mode.
 
 ## v2.2.4
 

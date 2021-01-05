@@ -41,6 +41,33 @@ however this is NOT recommended, unless you know what you're doing.
 }
 ```
 
+### Strict mode
+
+> Available in v2.3+
+
+In strict mode, the selector parser will do additional syntax checks on input string.
+If there're syntax errors, return type will be `never` instead of `Element`.
+
+Example usage:
+
+```ts
+import 'typed-query-selector/strict'
+
+const element = document.querySelector('div[test') // return `never`
+```
+
+This feature won't be enabled by default and you can opt-in.
+If you want to enable this, change import entry:
+
+```diff
+- import 'typed-query-selector'
++ import 'typed-query-selector/strict'
+```
+
+That's all. If you pass an invalid selector,
+because it returns `never`, TypeScript will prevent you from
+accessing properties/methods on element or using element at somewhere.
+
 ### Use the parser
 
 If you just want to use the selector parser itself, we've exported for you:
@@ -127,6 +154,15 @@ document.querySelector('div#app >') // ==> Element
 
 document.querySelector('div#app ?') // ==> Element
 ```
+
+## 🔩 Technical Details
+
+### Why returns `never` in strict mode?
+
+In runtime, if you pass an invalid selector string to `querySelector` or
+`querySelectorAll` function, it will throw an error instead of returning
+`null` or `undefined` or anything else.
+For details, please read [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/basic-types.html#never).
 
 ## 🔗 Related
 
