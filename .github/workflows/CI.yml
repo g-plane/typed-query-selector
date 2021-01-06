@@ -38,7 +38,7 @@ jobs:
     - name: Link package
       run: |
         cd ./g-plane/typed-query-selector
-        npm link
+        sudo npm link
         cd ../../sindresorhus/refined-github
         npm link typed-query-selector
     - name: Execute in non-strict mode
