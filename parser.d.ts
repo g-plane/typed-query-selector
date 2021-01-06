@@ -79,14 +79,14 @@ type Postprocess<Tags extends string[], R = []> = Tags extends []
     : never
   : Tags
 /** Postprocess each tag with simple validation. */
-type PostprocessEach<I> = I extends `${string}.` // invalid selector
-  ? unknown
-  : I extends `${string}#` // invalid selector
-  ? unknown
-  : I extends `${infer Tag}.${string}`
-  ? PostprocessEach<Tag>
-  : I extends `${infer Tag}#${string}`
-  ? PostprocessEach<Tag>
+type PostprocessEach<I> = I extends `${infer Tag}.${infer Rest}`
+  ? Rest extends '' // this can't be empty
+    ? unknown
+    : PostprocessEach<Tag>
+  : I extends `${infer Tag}#${infer Rest}`
+  ? Rest extends '' // this can't be empty
+    ? unknown
+    : PostprocessEach<Tag>
   : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
   ? PostprocessEach<Tag>
   : I extends `${string}|${infer R}` // namespace prefix
