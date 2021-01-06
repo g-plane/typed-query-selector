@@ -106,4 +106,10 @@ type _Tests = [
   Expect<Equal<ParseSelector<'|div'>, HTMLDivElement>>,
   Expect<Equal<ParseSelector<'a|div'>, HTMLDivElement>>,
   Expect<Equal<ParseSelector<'*|div'>, HTMLDivElement>>,
+  Expect<
+    Equal<
+      ParseSelector<'div#test > span, div > button.test'>,
+      HTMLSpanElement | HTMLButtonElement
+    >
+  >,
 ]

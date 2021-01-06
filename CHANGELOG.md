@@ -6,6 +6,7 @@
 - Treat empty attribute `[]` as syntax error.
 - Added namespace prefix support.
 - Added strict mode.
+- Fixed precedences between combinators and groupings.
 
 ## v2.2.4
 

@@ -6,6 +6,13 @@ type Trim<S extends string> = S extends `${infer T}${Whitespace}`
   : S
 
 type Combinators = ' ' | '>' | '~' | '+'
+type GetLastTag<
+  I extends string
+> = I extends `${string}${Combinators}${infer Right}`
+  ? Right extends '' // right arm can't be empty
+    ? unknown
+    : GetLastTag<Right>
+  : I
 
 type PseudoClassesFirstChar =
   | 'a'
@@ -65,7 +72,7 @@ type Preprocess<I extends string> = I extends `${infer L}\\${Quotes}${infer R}` 
 type Postprocess<Tags extends string[], R = []> = Tags extends []
   ? R
   : Tags extends [infer H, ...infer Rest]
-  ? PostprocessEach<H> extends infer T
+  ? PostprocessEach<GetLastTag<H>> extends infer T
     ? unknown extends T
       ? unknown
       : Postprocess<Rest, [...R, T]>
@@ -93,11 +100,7 @@ type PostprocessEach<I> = I extends `${string}.` // invalid selector
 export type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
   ? I extends ''
     ? unknown
-    : Preprocess<PreprocessGrouping<I>> extends infer I
-    ? I extends `${string}${Combinators}${infer Right}`
-      ? ParseSelectorToTagNames<Right>
-      : Postprocess<Split<I>>
-    : never
+    : Postprocess<Split<Preprocess<PreprocessGrouping<I>>>>
   : never
 
 export type ParseSelector<I extends string> = TagNameToElement<
