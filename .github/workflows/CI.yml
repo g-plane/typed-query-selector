@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -17,3 +18,34 @@ jobs:
       run: pnpx prettier --check *.ts
     - name: Run tests
       run: pnpm test
+  user_test:
+    name: User Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        path: ./g-plane/typed-query-selector
+    - name: Checkout "refined-github"
+      uses: actions/checkout@v2
+      with:
+        repository: sindresorhus/refined-github
+        ref: aa1904c847480f30d04a0b3c8c60da2c9bee8e48
+        path: ./sindresorhus/refined-github
+    - name: Install dependencies
+      run: npm ci
+      working-directory: ./sindresorhus/refined-github
+    - name: Link package
+      run: |
+        cd ./g-plane/typed-query-selector
+        npm link
+        cd ../../sindresorhus/refined-github
+        npm link typed-query-selector
+    - name: Execute in non-strict mode
+      run: node node_modules/.bin/tsc --noEmit --extendedDiagnostics
+      working-directory: ./sindresorhus/refined-github
+    - name: Execute in strict mode
+      run: |
+        sed -i "s/typed-query-selector/typed-query-selector\/strict/" source/refined-github.ts
+        node node_modules/.bin/tsc --noEmit --extendedDiagnostics
+      working-directory: ./sindresorhus/refined-github
