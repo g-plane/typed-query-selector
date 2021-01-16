@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.3.0
+
 - Treat empty string as syntax error.
 - Treat empty attribute `[]` as syntax error.
 - Added namespace prefix support.
