@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed errors with disabled `skipLibCheck`.
+
 ## v2.3.0
 
 - Treat empty string as syntax error.

@@ -41,14 +41,14 @@ type IdentifierFirstChar =
   | '_'
 type IdentifierChar = IdentifierFirstChar | Digit
 
-type IsValidTags<S extends string[]> = S extends [infer H, ...infer Rest]
+type IsValidTags<S> = S extends [infer H, ...infer Rest]
   ? H extends '' | '*'
     ? IsValidTags<Rest>
     : IsValidTagName<H> extends true
     ? IsValidTags<Rest>
     : false
   : true
-type IsValidTagName<S extends string> = S extends `${infer H}${infer Rest}`
+type IsValidTagName<S> = S extends `${infer H}${infer Rest}`
   ? H extends IdentifierFirstChar
     ? IsValidRestChars<Rest>
     : false
@@ -60,10 +60,10 @@ type IsValidRestChars<S extends string> = S extends `${infer H}${infer Rest}`
   : true // no characters left, so it's OK
 
 type Parse<S extends string> = ParseSelectorToTagNames<S> extends infer Tags
-  ? unknown extends Tags
-    ? never
-    : IsValidTags<Tags> extends true
-    ? TagNameToElement<Tags[number]>
+  ? Tags extends string[]
+    ? IsValidTags<Tags> extends true
+      ? TagNameToElement<Tags[number]>
+      : never
     : never
   : never
 

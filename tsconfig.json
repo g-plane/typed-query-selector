@@ -1,6 +1,7 @@
 {
   "extends": "@gplane/tsconfig",
   "compilerOptions": {
+    "skipLibCheck": false,
     "noEmit": true,
     "noUnusedLocals": false
   }
