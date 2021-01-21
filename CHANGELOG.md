@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Fixed errors with disabled `skipLibCheck`.
+- Allowed to specify custom fallback type when failed to parse selector.
+(only for `ParseSelector` type, not for `querySelector` function)
 
 ## v2.3.0
 

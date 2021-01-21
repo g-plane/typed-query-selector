@@ -107,17 +107,19 @@ export type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
   : never
 
 export type ParseSelector<
-  I extends string
+  I extends string,
+  Fallback extends Element = Element
 > = ParseSelectorToTagNames<I> extends infer TagNames
   ? TagNames extends string[]
-    ? TagNameToElement<TagNames[number]>
-    : Element
+    ? TagNameToElement<TagNames[number], Fallback>
+    : Fallback
   : never
 
 export type TagNameToElement<
-  Tag extends string
+  Tag extends string,
+  Fallback extends Element = Element
 > = Tag extends keyof HTMLElementTagNameMap
   ? HTMLElementTagNameMap[Tag]
   : Tag extends keyof SVGElementTagNameMap
   ? SVGElementTagNameMap[Tag]
-  : Element
+  : Fallback

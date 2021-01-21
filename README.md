@@ -84,6 +84,17 @@ type MyElement = ParseSelector<'form#login'>
 Please note that you should import `typed-query-selector/parser`, not `typed-query-selector`.
 This is safe because this import doesn't patch to the `querySelector` and `querySelectorAll` function.
 
+Sometimes, you may want to specify another fallback type (such as `HTMLElement`, not default `Element` type)
+when failed to parse selector or failed to look up, you can pass a fallback type as the second type parameter:
+
+> Available in v2.4+
+
+```ts
+import type { ParseSelector } from 'typed-query-selector/parser'
+
+type MyElement = ParseSelector<'unknown-tag', HTMLElement> // ==> HTMLElement
+```
+
 ## 💡 Supported Use Cases
 
 ### With class, ID, pseudo class or attribute
