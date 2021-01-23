@@ -60,7 +60,7 @@ type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escap
   ? Preprocess<`${L}${R}`>
   : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
   ? Preprocess<`${L}${R}`>
-  : I extends `${infer _}[]${infer _}` // invalid selector
+  : I extends `${string}[]${string}` // invalid selector
   ? unknown
   : I extends `${infer L}[${string}]${infer R}` // remove attribute
   ? Preprocess<`${L}${R}`>
