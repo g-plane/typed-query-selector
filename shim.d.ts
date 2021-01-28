@@ -2,12 +2,10 @@ import type { ParseSelector } from './parser'
 
 declare global {
   interface ParentNode {
-    querySelector<S extends string, E extends Element = ParseSelector<S>>(
-      selector: S,
-    ): E | null
+    querySelector<S extends string>(selector: S): ParseSelector<S> | null
 
-    querySelectorAll<S extends string, E extends Element = ParseSelector<S>>(
+    querySelectorAll<S extends string>(
       selector: S,
-    ): NodeListOf<E>
+    ): NodeListOf<ParseSelector<S>>
   }
 }

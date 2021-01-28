@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.4.1
+
+- Fixed return type in shim can be cast.
+
 ## v2.4.0
 
 - Fixed errors with disabled `skipLibCheck`.

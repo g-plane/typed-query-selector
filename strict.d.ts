@@ -69,11 +69,11 @@ type Parse<S extends string> = ParseSelectorToTagNames<S> extends infer Tags
 
 declare global {
   interface ParentNode {
-    querySelector<S extends string, E extends Element = Parse<S>>(
+    querySelector<S extends string, E extends Parse<S>>(
       selector: S,
     ): [E] extends [never] ? never : E | null
 
-    querySelectorAll<S extends string, E extends Element = Parse<S>>(
+    querySelectorAll<S extends string, E extends Parse<S>>(
       selector: S,
     ): [E] extends [never] ? never : NodeListOf<E>
   }
