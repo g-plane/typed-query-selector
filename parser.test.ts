@@ -112,8 +112,6 @@ type _Tests = [
       HTMLSpanElement | HTMLButtonElement
     >
   >,
-  Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
-  Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
   Expect<
     Equal<ParseSelector<':is(div, span)'>, HTMLDivElement | HTMLSpanElement>
   >,
@@ -152,4 +150,6 @@ type _Tests = [
       HTMLParagraphElement
     >
   >,
+  Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
 ]
