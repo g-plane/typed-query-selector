@@ -150,6 +150,52 @@ type _Tests = [
       HTMLParagraphElement
     >
   >,
+  Expect<
+    Equal<ParseSelector<':where(div, span)'>, HTMLDivElement | HTMLSpanElement>
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':where(div#id, span.cls)'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':where(div[key], span[key=value])'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'body :where(div, span)'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'body :where(div#id, span.cls)'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<Equal<ParseSelector<':where(div, span) p'>, HTMLParagraphElement>>,
+  Expect<
+    Equal<ParseSelector<':where(div, span) p.cls#id'>, HTMLParagraphElement>
+  >,
+  Expect<
+    Equal<ParseSelector<':where(div, span) p[key=value]'>, HTMLParagraphElement>
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'main.container :where(div, span) p[key=value]'>,
+      HTMLParagraphElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':is(button.btn, a.btn):not([key=value]):not(.class)'>,
+      HTMLButtonElement | HTMLAnchorElement
+    >
+  >,
   Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
 ]
