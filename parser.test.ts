@@ -114,4 +114,42 @@ type _Tests = [
   >,
   Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
+  Expect<
+    Equal<ParseSelector<':is(div, span)'>, HTMLDivElement | HTMLSpanElement>
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':is(div#id, span.cls)'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':is(div[key], span[key=value])'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'body :is(div, span)'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'body :is(div#id, span.cls)'>,
+      HTMLDivElement | HTMLSpanElement
+    >
+  >,
+  Expect<Equal<ParseSelector<':is(div, span) p'>, HTMLParagraphElement>>,
+  Expect<Equal<ParseSelector<':is(div, span) p.cls#id'>, HTMLParagraphElement>>,
+  Expect<
+    Equal<ParseSelector<':is(div, span) p[key=value]'>, HTMLParagraphElement>
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'main.container :is(div, span) p[key=value]'>,
+      HTMLParagraphElement
+    >
+  >,
 ]

@@ -38,6 +38,14 @@ type Split<S> = S extends `${string},` // invalid selector
   ? [Left, ...Split<Right>]
   : [S]
 
+type Join<Seq> = Seq extends []
+  ? ''
+  : Seq extends [infer Head, ...infer Rest]
+  ? Head extends string
+    ? `${Head}${Join<Rest>}`
+    : never
+  : never
+
 type Quotes = '"' | "'"
 
 // DO NOT use union type like `${infer L},${Whitespace}${infer R}` here,
@@ -65,6 +73,24 @@ type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escap
   : I extends `${infer L}[${string}]${infer R}` // remove attribute
   ? Preprocess<`${L}${R}`>
   : I
+
+/** Parse `is:()` and `:where()` */
+type ExpandFunctions<I> = I extends `${infer L}:is(${infer Args})${infer R}`
+  ? Join<Expander<Split<Args>, L, R>> extends `${infer S}, `
+    ? S
+    : never
+  : I extends `${infer L}:where(${infer Args})${infer R}`
+  ? Join<Expander<Split<Args>, L, R>> extends `${infer S}, `
+    ? S
+    : never
+  : I
+type Expander<Args, L extends string, R extends string> = Args extends []
+  ? []
+  : Args extends [infer Head, ...infer Rest]
+  ? Head extends string
+    ? [`${L}${Head}${R}, `, ...Expander<Rest, L, R>]
+    : never
+  : never
 
 /** Check whether each tag is valid or not. */
 type Postprocess<
@@ -103,7 +129,7 @@ type PostprocessEach<I> = I extends `${infer Tag}.${infer Rest}`
 export type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
   ? I extends ''
     ? unknown
-    : Postprocess<Split<Preprocess<PreprocessGrouping<I>>>>
+    : Postprocess<Split<ExpandFunctions<Preprocess<PreprocessGrouping<I>>>>>
   : never
 
 export type ParseSelector<
