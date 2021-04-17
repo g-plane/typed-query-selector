@@ -119,6 +119,18 @@ import 'typed-query-selector'
 document.querySelector('input.form-control[name=username]') // ==> HTMLInputElement
 ```
 
+And with `:is()` or `:where()`:
+
+> Available in v2.5+
+
+```typescript
+import 'typed-query-selector'
+
+document.querySelector(':is(div#id, span.class[k=v])') // ==> HTMLDivElement | HTMLSpanElement
+
+document.querySelector(':where(div#id, span.class[k=v])') // ==> HTMLDivElement | HTMLSpanElement
+```
+
 ### Combinators
 
 ```typescript
