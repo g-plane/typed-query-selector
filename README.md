@@ -45,7 +45,7 @@ however this is NOT recommended, unless you know what you're doing.
 
 > Available in v2.3+
 
-In strict mode, the selector parser will do additional syntax checks on input string.
+In strict mode, the selector parser will perform additional syntax checks on input string.
 If there're syntax errors, return type will be `never` instead of `Element`.
 
 Example usage:
