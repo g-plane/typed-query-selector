@@ -34,6 +34,8 @@ type PseudoClassesFirstChar =
 
 type Split<S> = S extends `${string},` // invalid selector
   ? unknown
+  : S extends ''
+  ? []
   : S extends `${infer Left},${infer Right}`
   ? [Left, ...Split<Right>]
   : [S]
@@ -75,14 +77,17 @@ type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escap
   : I
 
 /** Parse `is:()` and `:where()` */
-type ExpandFunctions<I> = I extends `${infer L}:is(${infer Args})${infer R}`
-  ? Join<Expander<Split<Args>, L, R>> extends `${infer S}, `
-    ? S
-    : never
-  : I extends `${infer L}:where(${infer Args})${infer R}`
-  ? Join<Expander<Split<Args>, L, R>> extends `${infer S}, `
-    ? S
-    : never
+type ExpandFunctions<
+  I,
+  Seen = '',
+  LeftParts extends string[] = [],
+  Right extends string = ''
+> = I extends `${infer L}:${infer Pseudo}(${infer Args})${infer R}`
+  ? Pseudo extends 'is' | 'where'
+    ? ExpandFunctions<R, Args, [...LeftParts, L], R>
+    : ExpandFunctions<`${L}${R}`, Seen, LeftParts, R>
+  : Join<Expander<Split<Seen>, Join<LeftParts>, Right>> extends `${infer S}, `
+  ? S
   : I
 type Expander<Args, L extends string, R extends string> = Args extends []
   ? []
@@ -136,7 +141,9 @@ export type ParseSelector<
   I extends string,
   Fallback extends Element = Element
 > = ParseSelectorToTagNames<I> extends infer TagNames
-  ? TagNames extends string[]
+  ? TagNames extends []
+    ? TagNameToElement<''>
+    : TagNames extends string[]
     ? TagNameToElement<TagNames[number], Fallback>
     : Fallback
   : never

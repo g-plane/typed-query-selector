@@ -60,7 +60,9 @@ type IsValidRestChars<S extends string> = S extends `${infer H}${infer Rest}`
   : true // no characters left, so it's OK
 
 type Parse<S extends string> = ParseSelectorToTagNames<S> extends infer Tags
-  ? Tags extends string[]
+  ? Tags extends []
+    ? TagNameToElement<''>
+    : Tags extends string[]
     ? IsValidTags<Tags> extends true
       ? TagNameToElement<Tags[number]>
       : never

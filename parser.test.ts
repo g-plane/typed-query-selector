@@ -196,6 +196,44 @@ type _Tests = [
       HTMLButtonElement | HTMLAnchorElement
     >
   >,
+  Expect<
+    Equal<
+      ParseSelector<':is(div.cls, span#id) :is(button.btn, a.btn)'>,
+      HTMLButtonElement | HTMLAnchorElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':is(div.cls, span#id) :where(button.btn, a.btn)'>,
+      HTMLButtonElement | HTMLAnchorElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':where(div.cls, span#id) :is(button.btn, a.btn)'>,
+      HTMLButtonElement | HTMLAnchorElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':where(div.cls, span#id) :where(button.btn, a.btn)'>,
+      HTMLButtonElement | HTMLAnchorElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'p :is(div.cls, span#id) :is(button.btn, a.btn) h1'>,
+      HTMLHeadingElement
+    >
+  >,
+  Expect<Equal<ParseSelector<'p:is(.a, .b)'>, HTMLParagraphElement>>,
+  Expect<Equal<ParseSelector<'p:is(.a, .b):is(.c, .d)'>, HTMLParagraphElement>>,
+  Expect<
+    Equal<ParseSelector<'p:not(.a, .b):is(.c, .d)'>, HTMLParagraphElement>
+  >,
+  Expect<
+    Equal<ParseSelector<'p:is(.a, .b):not(.c, .d)'>, HTMLParagraphElement>
+  >,
   Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
 ]
