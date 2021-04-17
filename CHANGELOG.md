@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.5.0
+
 - Added support for `:is()` and `:where()` pseudo-classes. (Fix [#13](https://github.com/g-plane/typed-query-selector/issues/13))
 
 ## v2.4.1
