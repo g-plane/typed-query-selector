@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed regression bug: fallback type doesn't work. (Fix [#14](https://github.com/g-plane/typed-query-selector/issues/14))
+
 ## v2.5.0
 
 - Added support for `:is()` and `:where()` pseudo-classes. (Fix [#13](https://github.com/g-plane/typed-query-selector/issues/13))

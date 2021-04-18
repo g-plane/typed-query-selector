@@ -142,7 +142,7 @@ export type ParseSelector<
   Fallback extends Element = Element
 > = ParseSelectorToTagNames<I> extends infer TagNames
   ? TagNames extends []
-    ? TagNameToElement<''>
+    ? TagNameToElement<'', Fallback>
     : TagNames extends string[]
     ? TagNameToElement<TagNames[number], Fallback>
     : Fallback

@@ -234,6 +234,20 @@ type _Tests = [
   Expect<
     Equal<ParseSelector<'p:is(.a, .b):not(.c, .d)'>, HTMLParagraphElement>
   >,
+  Expect<Equal<ParseSelector<'', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'#id', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'.class', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'.class[k=v]', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'div .class', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'span + .class', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'span ~ .class', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'span > .class', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<'[key=value]', HTMLElement>, HTMLElement>>,
+  Expect<Equal<ParseSelector<':scope > :not(a)', HTMLElement>, HTMLElement>>,
+  Expect<
+    Equal<ParseSelector<'[aria-checked="true"]', HTMLElement>, HTMLElement>
+  >,
+  Expect<Equal<ParseSelector<'[data-scope]', HTMLElement>, HTMLElement>>,
 ]
