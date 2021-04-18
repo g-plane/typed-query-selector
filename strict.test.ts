@@ -34,6 +34,7 @@ const e30 = document.querySelector('div, span[')
 const e31 = document.querySelector('div,')
 const e32 = document.querySelector('div, .badge')
 const e33 = document.querySelector('div, .')
+const e34 = document.querySelector('')
 
 type Tests = [
   Expect<Equal<typeof e1, Element | null>>,
@@ -69,6 +70,7 @@ type Tests = [
   Expect<Equal<typeof e31, never>>,
   Expect<Equal<typeof e32, HTMLDivElement | Element | null>>,
   Expect<Equal<typeof e33, never>>,
+  Expect<Equal<typeof e34, never>>,
 ]
 
 // @ts-expect-error
