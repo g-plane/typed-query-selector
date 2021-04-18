@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.5.1
+
 - Fixed regression bug: fallback type doesn't work. (Fix [#14](https://github.com/g-plane/typed-query-selector/issues/14))
 
 ## v2.5.0
