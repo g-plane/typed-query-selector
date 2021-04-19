@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.5.2
+
+- Fixed attribute syntax in `:is()` and `:where()`. (Fix [#15](https://github.com/g-plane/typed-query-selector/issues/15))
+
 ## v2.5.1
 
 - Fixed regression bug: fallback type doesn't work. (Fix [#14](https://github.com/g-plane/typed-query-selector/issues/14))

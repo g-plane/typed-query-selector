@@ -234,6 +234,19 @@ type _Tests = [
   Expect<
     Equal<ParseSelector<'p:is(.a, .b):not(.c, .d)'>, HTMLParagraphElement>
   >,
+  Expect<Equal<ParseSelector<'a:is([data-a], [data-b])'>, HTMLAnchorElement>>,
+  Expect<
+    Equal<
+      ParseSelector<'a:is([data-selected-links~="pulse"], [data-selected-links~="security"])'>,
+      HTMLAnchorElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'input:is([name="commit_title"], [name="rgh-pr-check-waiter"])'>,
+      HTMLInputElement
+    >
+  >,
   Expect<Equal<ParseSelector<'', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
