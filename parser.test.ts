@@ -99,6 +99,12 @@ type _Tests = [
     Equal<ParseSelector<"textarea[name='comment[\\']']">, HTMLTextAreaElement>
   >,
   Expect<Equal<ParseSelector<'div[data-d] button[data-b]'>, HTMLButtonElement>>,
+  Expect<
+    Equal<
+      ParseSelector<'a[href*="/issues"][href*="is%3Apr"]'>,
+      HTMLAnchorElement
+    >
+  >,
   Expect<Equal<ParseSelector<'div.'>, Element>>,
   Expect<Equal<ParseSelector<'div#'>, Element>>,
   Expect<Equal<ParseSelector<'div:'>, Element>>,
