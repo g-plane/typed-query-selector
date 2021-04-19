@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.5.3
+
+- Fixed a regression bug which is introduced in v2.5.2.
+
 ## v2.5.2
 
 - Fixed attribute syntax in `:is()` and `:where()`. (Fix [#15](https://github.com/g-plane/typed-query-selector/issues/15))
