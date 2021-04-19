@@ -30,7 +30,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: sindresorhus/refined-github
-        ref: aa1904c847480f30d04a0b3c8c60da2c9bee8e48
+        ref: cf93baa81dfd93d8ad6534ed3c13c8db4efd3432
         path: ./sindresorhus/refined-github
     - name: Install dependencies
       run: npm ci
