@@ -105,6 +105,15 @@ type _Tests = [
       HTMLAnchorElement
     >
   >,
+  Expect<
+    Equal<
+      ParseSelector<`
+		a[href*="/issues"]:not([href*="sort%3A"]):not(.issues-reset-query),
+    a[href*="/pulls" ]:not([href*="sort%3A"]):not(.issues-reset-query)
+	`>,
+      HTMLAnchorElement
+    >
+  >,
   Expect<Equal<ParseSelector<'div.'>, Element>>,
   Expect<Equal<ParseSelector<'div#'>, Element>>,
   Expect<Equal<ParseSelector<'div:'>, Element>>,

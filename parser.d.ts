@@ -72,8 +72,8 @@ type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escap
   ? Preprocess<`${L}${R}`>
   : I extends `${string}[]${string}` // invalid selector
   ? unknown
-  : I extends `${infer L}[${string}~${string}]${infer R}`
-  ? Preprocess<`${L}[=]${R}`> // preprocess `~` in attribute, because `~` is also a combinator
+  : I extends `${infer L}[${string}]${infer R}` // process attribute
+  ? Preprocess<`${L}#x${R}`> // replace it with a fake ID selector
   : I
 
 /** Parse `is:()` and `:where()` */
@@ -89,7 +89,6 @@ type ExpandFunctions<
   : Join<Expander<Split<Seen>, Join<LeftParts>, Right>> extends `${infer S},`
   ? S
   : I
-type a = ExpandFunctions<PreprocessGrouping<'a:is(, )'>>
 type Expander<Args, L extends string, R extends string> = Args extends []
   ? []
   : Args extends [infer Head, ...infer Rest]
@@ -122,8 +121,6 @@ type PostprocessEach<I> = I extends `${infer Tag}.${infer Rest}`
   ? Rest extends '' // this can't be empty
     ? unknown
     : PostprocessEach<Tag>
-  : I extends `${infer L}[${string}]${infer R}` // remove attribute
-  ? PostprocessEach<`${L}${R}`>
   : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
   ? PostprocessEach<Tag>
   : I extends `${string}|${infer R}` // namespace prefix
