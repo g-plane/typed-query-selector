@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.6.0
+
 - Support `.closest()` method on `Element`. (Close [#16](https://github.com/g-plane/typed-query-selector/issues/16))
 
 ## v2.5.3
