@@ -8,4 +8,8 @@ declare global {
       selector: S,
     ): NodeListOf<ParseSelector<S>>
   }
+
+  interface Element {
+    closest<S extends string>(selector: S): ParseSelector<S> | null
+  }
 }

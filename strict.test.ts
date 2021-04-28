@@ -83,3 +83,10 @@ const results: Array<HTMLAnchorElement | null> = []
 results.push(document.querySelector('div'))
 // @ts-expect-error
 results.push(document.querySelector('div#app'))
+
+const closest = a1!.closest('button.btn-confirm, a.link')
+type TestClosest = Expect<
+  Equal<typeof closest, HTMLButtonElement | HTMLAnchorElement | null>
+>
+const invalidClosest = a1!.closest('button.btn-confirm, a.')
+type TestInvalidClosest = Expect<Equal<typeof invalidClosest, never>>

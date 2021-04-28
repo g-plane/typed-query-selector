@@ -79,4 +79,10 @@ declare global {
       selector: S,
     ): [E] extends [never] ? never : NodeListOf<E>
   }
+
+  interface Element {
+    closest<S extends string, E extends Parse<S>>(
+      selector: S,
+    ): [E] extends [never] ? never : E | null
+  }
 }
