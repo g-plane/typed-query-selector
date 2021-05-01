@@ -8,7 +8,7 @@
   "files": [
     "*.d.ts"
   ],
-  "main": "shim.d.ts",
+  "main": "index.js",
   "types": "shim.d.ts",
   "sideEffects": false,
   "scripts": {
