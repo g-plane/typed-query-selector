@@ -30,6 +30,19 @@ document.querySelectorAll('span.badge') // ==> NodeListOf<HTMLSpanElement>
 anElement.querySelector('button#submit') // ==> HTMLButtonElement
 ```
 
+The example above assumes you're using bundlers or build tools with transpilers,
+however, sometimes this may not match your situation.
+For example, running `tsc` or Babel out of bundlers.
+In this case, you can import this library like this:
+
+```typescript
+import type {} from 'typed-query-selector'
+
+document.querySelector('div#app') // ==> HTMLDivElement
+```
+
+This looks ugly but it works.
+
 If you aren't going to use ES Modules you can modify your `tsconfig.json`,
 however this is NOT recommended, unless you know what you're doing.
 
