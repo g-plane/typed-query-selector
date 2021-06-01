@@ -81,7 +81,7 @@ type ExpandFunctions<
   I,
   Seen = '',
   LeftParts extends string[] = [],
-  Right extends string = ''
+  Right extends string = '',
 > = I extends `${infer L}:${infer Pseudo}(${infer Args})${infer R}`
   ? Pseudo extends 'is' | 'where'
     ? ExpandFunctions<R, Args, [...LeftParts, L], R>
@@ -98,20 +98,18 @@ type Expander<Args, L extends string, R extends string> = Args extends []
   : never
 
 /** Check whether each tag is valid or not. */
-type Postprocess<
-  Tags extends string[],
-  R extends string[] = []
-> = Tags extends []
-  ? R
-  : Tags extends [infer H, ...infer Rest]
-  ? PostprocessEach<GetLastTag<H>> extends infer T
-    ? T extends string
-      ? Rest extends string[]
-        ? Postprocess<Rest, [...R, T]>
-        : never
-      : unknown
-    : never
-  : Tags
+type Postprocess<Tags extends string[], R extends string[] = []> =
+  Tags extends []
+    ? R
+    : Tags extends [infer H, ...infer Rest]
+    ? PostprocessEach<GetLastTag<H>> extends infer T
+      ? T extends string
+        ? Rest extends string[]
+          ? Postprocess<Rest, [...R, T]>
+          : never
+        : unknown
+      : never
+    : Tags
 /** Postprocess each tag with simple validation. */
 type PostprocessEach<I> = I extends `${infer Tag}.${infer Rest}`
   ? Rest extends '' // this can't be empty
@@ -139,7 +137,7 @@ export type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
 
 export type ParseSelector<
   I extends string,
-  Fallback extends Element = Element
+  Fallback extends Element = Element,
 > = ParseSelectorToTagNames<I> extends infer TagNames
   ? TagNames extends []
     ? TagNameToElement<'', Fallback>
@@ -150,7 +148,7 @@ export type ParseSelector<
 
 export type TagNameToElement<
   Tag extends string,
-  Fallback extends Element = Element
+  Fallback extends Element = Element,
 > = Tag extends keyof HTMLElementTagNameMap
   ? HTMLElementTagNameMap[Tag]
   : Tag extends keyof SVGElementTagNameMap
