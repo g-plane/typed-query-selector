@@ -1,34 +1,35 @@
-devDependencies:
-  '@gplane/tsconfig': 4.0.0
-  '@type-challenges/utils': 0.1.1
-  prettier: 2.2.1
-  typescript: 4.2.2
-lockfileVersion: 5.2
-packages:
-  /@gplane/tsconfig/4.0.0:
-    dev: true
-    resolution:
-      integrity: sha512-Jjtuaxv1J4Wu10o0jxWKmkWdYHuJF9fh0ThiTMz/emsldJm5TjbZHIBTtI8mtGMhiLNHBtsMjZf7tQYOvJpWtQ==
-  /@type-challenges/utils/0.1.1:
-    dev: true
-    resolution:
-      integrity: sha512-A7ljYfBM+FLw+NDyuYvGBJiCEV9c0lPWEAdzfOAkb3JFqfLl0Iv/WhWMMARHiRKlmmiD1g8gz/507yVvHdQUYA==
-  /prettier/2.2.1:
-    dev: true
-    engines:
-      node: '>=10.13.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
-  /typescript/4.2.2:
-    dev: true
-    engines:
-      node: '>=4.2.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-tbb+NVrLfnsJy3M59lsDgrzWIflR4d4TIUjz+heUnHZwdF7YsrMTKoRERiIvI2lvBG95dfpLxB21WZhys1bgaQ==
+lockfileVersion: 5.3
+
 specifiers:
   '@gplane/tsconfig': ^4.0.0
   '@type-challenges/utils': ^0.1.1
   prettier: ^2.2.1
   typescript: ^4.2.2
+
+devDependencies:
+  '@gplane/tsconfig': 4.0.0
+  '@type-challenges/utils': 0.1.1
+  prettier: 2.2.1
+  typescript: 4.2.2
+
+packages:
+
+  /@gplane/tsconfig/4.0.0:
+    resolution: {integrity: sha512-Jjtuaxv1J4Wu10o0jxWKmkWdYHuJF9fh0ThiTMz/emsldJm5TjbZHIBTtI8mtGMhiLNHBtsMjZf7tQYOvJpWtQ==}
+    dev: true
+
+  /@type-challenges/utils/0.1.1:
+    resolution: {integrity: sha512-A7ljYfBM+FLw+NDyuYvGBJiCEV9c0lPWEAdzfOAkb3JFqfLl0Iv/WhWMMARHiRKlmmiD1g8gz/507yVvHdQUYA==}
+    dev: true
+
+  /prettier/2.2.1:
+    resolution: {integrity: sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.2.2:
+    resolution: {integrity: sha512-tbb+NVrLfnsJy3M59lsDgrzWIflR4d4TIUjz+heUnHZwdF7YsrMTKoRERiIvI2lvBG95dfpLxB21WZhys1bgaQ==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
