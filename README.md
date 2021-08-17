@@ -30,6 +30,8 @@ document.querySelectorAll('span.badge') // ==> NodeListOf<HTMLSpanElement>
 anElement.querySelector('button#submit') // ==> HTMLButtonElement
 ```
 
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEGYADcAxAEMwYBAEo4AenVwAvNoB8cABIAVALIAZACIyAopXZdGzVg558iQyjWgSpcxWBwBgBm0CCy5BAA5sAcqhpaugYmFgBiYXZork4sbJxuBB7C3lAAguTkEiRg8hzcAEbyGFFo8Zo6+nAAchAYaObAJDAA8sEAPCnmAjUcma56TtTk8lBocJTwtXP5AFxGZubbjvRb9vm8hYLFohL1eDC0HLIkePUgwDBtiZ2TAEL3jyOMHoQA)*
+
 The example above assumes you're using bundlers or build tools with transpilers,
 however, sometimes this may not match your situation.
 For example, running `tsc` or Babel out of bundlers.
@@ -40,6 +42,8 @@ import type {} from 'typed-query-selector'
 
 document.querySelector('div#app') // ==> HTMLDivElement
 ```
+
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBDAnmApnA3gXzgMyhEOAciVQBMBaARwFcUpEKBnFAGxQGMZoiAoXshA40QKAHYwAdLXqIAym07coACiJlgANwDEAQzBgiASjgB6U3AC8lgHxwAEgBUAsgBkAIloCi7URKA)*
 
 This looks ugly but it works.
 
@@ -94,6 +98,8 @@ import type { ParseSelector } from 'typed-query-selector/parser'
 type MyElement = ParseSelector<'form#login'>
 ```
 
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBDAnmApnA3nACgQygZxQGUUAbFAYxmjgF84AzKCEOAciVQBMBaARwCuKKIh6FyVaAHoweQlDYAoRZzQBZRAFFyIFADt4AXmxziZStSgAeNg2ggAxKQgBzYHrYA+IA)*
+
 Please note that you should import `typed-query-selector/parser`, not `typed-query-selector`.
 This is safe because this import doesn't patch to the `querySelector` and `querySelectorAll` function.
 
@@ -107,6 +113,8 @@ import type { ParseSelector } from 'typed-query-selector/parser'
 
 type MyElement = ParseSelector<'unknown-tag', HTMLElement> // ==> HTMLElement
 ```
+
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBDAnmApnA3nACgQygZxQGUUAbFAYxmjgF84AzKCEOAciVQBMBaARwCuKKIh6FyVaAHoweQlDYAoRZzQBZRAFFyIFADt4AXmxziZStSgAeNgL0BrPRADuenjBwBzNgBo4ACQAVNQAZbRRdAwA+OCkpOENDGKDQ8MiYIA)*
 
 ## 💡 Supported Use Cases
 
@@ -124,6 +132,8 @@ document.querySelector('input[name=username]') // ==> HTMLInputElement
 document.querySelector('input:first-child') // ==> HTMLInputElement
 ```
 
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEGYADduVCFwCGwDoQQBKOAHotcALx6AfHAASAFQCyAGQAiMgKKV2XRs1bOefIkMo1oEqWkAYkUwMA1tXQNjc2s7aUc0D1cWNk5PAm9hP3EEFTA8GABtDkV2PTwyKFL2AF0InX0jU0srAEkOAphE5KZUj15MwWzRCXzCgC4AM2AoEhgsKgALYHIMBqjm2PbOwp70oA)*
+
 Even mix them:
 
 ```typescript
@@ -131,6 +141,8 @@ import 'typed-query-selector'
 
 document.querySelector('input.form-control[name=username]') // ==> HTMLInputElement
 ```
+
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEwDmDw8AZtBBYqELlAjkA2hwCG7ALx4yUXewC6CAJRwA9Dbj79APjgAJACoBZADIBJabIAopTsXEA)*
 
 And with `:is()` or `:where()`:
 
@@ -143,6 +155,8 @@ document.querySelector(':is(div#id, span.class[k=v])') // ==> HTMLDivElement | H
 
 document.querySelector(':where(div#id, span.class[k=v])') // ==> HTMLDivElement | HTMLSpanElement
 ```
+
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEALmAkxGYADcAxMAwAaOCTABDDtyrltJEgG0A1gF4FAXQCUCW3AD0TuBYsA+OAAkAKgFkAGQARRQBRSnYuOAAfHwDAgR0OCLQomEZmVnTeAiIhShpoCUkAdwALQjQ5RRV1TWT9Q2NzKzsHZ1d3Lz8g0IVU9Nj4oKTdQc4YIA)*
 
 ### Combinators
 
@@ -158,6 +172,8 @@ document.querySelector('h1 + p') // ==> HTMLParagraphElement
 document.querySelector('h2 ~ p') // ==> HTMLParagraphElement
 ```
 
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEAIwgZkcDMABuCAJRwA9OrgBebQD44ACQAqAWQAyAESUBRSuy6NmrBzz5EhlGtAnTZcAwAzaBBVDS1dAxMLADEQuzRXJxY2TjcCD2FvcQQACwBGOABqODAwzR19IzNzAAUAQyh6gHMmsFyEpKYU114MwSzRCVyAJjgAP1LyiKrousaWto77NKA)*
+
 ### Grouping selectors
 
 ```typescript
@@ -165,6 +181,8 @@ import 'typed-query-selector'
 
 document.querySelector('div, span') // ==> HTMLDivElement | HTMLSpanElement
 ```
+
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEGYADcANHBJgAhhwQBKOAHpNcALy6AfHAASAFQCyAGQAiMgKKV2XOAB8TFywOUcHaJzCA)*
 
 ### Fallback
 
@@ -180,6 +198,8 @@ document.querySelector('my-web-component') // ==> Element
 
 document.querySelector<MyComponent>('my-web-component') // ==> MyComponent
 ```
+
+*[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHo2vIEMo04q2SS4BZZAGEI4CADs04+GgAeMKRj4AJACr8AMgFFKIKfADeAX0YYIVPHukA6fIWQBlCtVpQAFAhDEA7mgBGWFSikJLSCACUcAD0UXAAvHEAfHA6aFYwpuaW+rYERE6UNNAAPIIiYqEwiR5eWL4BQRX6EdGxCcllwRL6QA)*
 
 #### Invalid selector
 
