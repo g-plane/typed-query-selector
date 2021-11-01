@@ -1,5 +1,15 @@
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Equal, Expect, NotEqual } from '@type-challenges/utils'
 import type { ParseSelector, ParseSelectorToTagNames } from './parser'
+
+declare class DefinedWebComponent extends HTMLElement {
+  #brand
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'defined-web-component': DefinedWebComponent
+  }
+}
 
 type _Tests = [
   Expect<Equal<ParseSelectorToTagNames<''>, unknown>>,
@@ -8,6 +18,8 @@ type _Tests = [
   Expect<Equal<ParseSelector<'*'>, Element>>,
   Expect<Equal<ParseSelector<string>, Element>>,
   Expect<Equal<ParseSelector<'my-web-component'>, Element>>,
+  Expect<Equal<ParseSelector<'defined-web-component'>, DefinedWebComponent>>,
+  Expect<NotEqual<ParseSelector<'defined-web-component'>, HTMLElement>>,
   Expect<Equal<ParseSelector<'.text-center'>, Element>>,
   Expect<Equal<ParseSelector<'#submit'>, Element>>,
   Expect<Equal<ParseSelector<'[type=email]'>, Element>>,
