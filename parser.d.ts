@@ -98,18 +98,20 @@ type Expander<Args, L extends string, R extends string> = Args extends []
   : never
 
 /** Check whether each tag is valid or not. */
-type Postprocess<Tags extends string[], R extends string[] = []> =
-  Tags extends []
-    ? R
-    : Tags extends [infer H, ...infer Rest]
-    ? PostprocessEach<GetLastTag<H>> extends infer T
-      ? T extends string
-        ? Rest extends string[]
-          ? Postprocess<Rest, [...R, T]>
-          : never
-        : unknown
-      : never
-    : Tags
+type Postprocess<
+  Tags extends string[],
+  R extends string[] = [],
+> = Tags extends []
+  ? R
+  : Tags extends [infer H, ...infer Rest]
+  ? PostprocessEach<GetLastTag<H>> extends infer T
+    ? T extends string
+      ? Rest extends string[]
+        ? Postprocess<Rest, [...R, T]>
+        : never
+      : unknown
+    : never
+  : Tags
 /** Postprocess each tag with simple validation. */
 type PostprocessEach<I> = I extends `${infer Tag}.${infer Rest}`
   ? Rest extends '' // this can't be empty

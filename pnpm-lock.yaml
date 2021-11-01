@@ -1,35 +1,35 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@gplane/tsconfig': ^4.0.0
+  '@gplane/tsconfig': ^5.0.0
   '@type-challenges/utils': ^0.1.1
-  prettier: ^2.3.0
-  typescript: ^4.4.3
+  prettier: ^2.4.1
+  typescript: ^4.4.4
 
 devDependencies:
-  '@gplane/tsconfig': 4.0.0
+  '@gplane/tsconfig': 5.0.0
   '@type-challenges/utils': 0.1.1
-  prettier: 2.3.0
-  typescript: 4.4.3
+  prettier: 2.4.1
+  typescript: 4.4.4
 
 packages:
 
-  /@gplane/tsconfig/4.0.0:
-    resolution: {integrity: sha512-Jjtuaxv1J4Wu10o0jxWKmkWdYHuJF9fh0ThiTMz/emsldJm5TjbZHIBTtI8mtGMhiLNHBtsMjZf7tQYOvJpWtQ==}
+  /@gplane/tsconfig/5.0.0:
+    resolution: {integrity: sha512-RgyxDE865mkyME4qavYnVg3L2EzWJXMGgMAyZEKvkHL200vRBWpkrpgwYdib1RFk9NhigczHntTdc6tRsvjDiQ==}
     dev: true
 
   /@type-challenges/utils/0.1.1:
     resolution: {integrity: sha512-A7ljYfBM+FLw+NDyuYvGBJiCEV9c0lPWEAdzfOAkb3JFqfLl0Iv/WhWMMARHiRKlmmiD1g8gz/507yVvHdQUYA==}
     dev: true
 
-  /prettier/2.3.0:
-    resolution: {integrity: sha512-kXtO4s0Lz/DW/IJ9QdWhAf7/NmPWQXkFr/r/WkR3vyI+0v8amTDxiaQSLzs8NBlytfLWX/7uQUMIW677yLKl4w==}
+  /prettier/2.4.1:
+    resolution: {integrity: sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
 
-  /typescript/4.4.3:
-    resolution: {integrity: sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==}
+  /typescript/4.4.4:
+    resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
