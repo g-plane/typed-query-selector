@@ -134,7 +134,13 @@ type PostprocessEach<I> = I extends `${infer Tag}.${infer Rest}`
 export type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
   ? I extends ''
     ? unknown
-    : Postprocess<Split<ExpandFunctions<Preprocess<PreprocessGrouping<I>>>>>
+    : Split<
+        ExpandFunctions<Preprocess<PreprocessGrouping<I>>>
+      > extends infer PreprocessedTagNames
+    ? PreprocessedTagNames extends string[]
+      ? Postprocess<PreprocessedTagNames>
+      : unknown
+    : never
   : never
 
 export type ParseSelector<
