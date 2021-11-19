@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.6.1
+
+- Fixed support of TypeScript 4.5.
+
 ## v2.6.0
 
 - Support `.closest()` method on `Element`. (Close [#16](https://github.com/g-plane/typed-query-selector/issues/16))
