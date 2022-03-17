@@ -274,6 +274,8 @@ type _Tests = [
       HTMLInputElement
     >
   >,
+  Expect<Equal<ParseSelector<'a:has(> img)'>, HTMLAnchorElement>>,
+  Expect<Equal<ParseSelector<'h1:has(+ p)'>, HTMLHeadingElement>>,
   Expect<Equal<ParseSelector<'', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'abc', HTMLElement>, HTMLElement>>,
   Expect<Equal<ParseSelector<'div#', HTMLElement>, HTMLElement>>,
