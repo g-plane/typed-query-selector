@@ -76,7 +76,7 @@ type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escap
   ? Preprocess<`${L}#x${R}`> // replace it with a fake ID selector
   : I
 
-/** Parse `is:()` and `:where()` */
+/** Parse `:is()` and `:where()` */
 type ExpandFunctions<
   I,
   Seen = '',
