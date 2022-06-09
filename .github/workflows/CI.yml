@@ -30,10 +30,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: sindresorhus/refined-github
-        ref: cf93baa81dfd93d8ad6534ed3c13c8db4efd3432
+        ref: 50c6fafc9692daa97daf894b5af5d4acb0caf7d8
         path: ./sindresorhus/refined-github
     - name: Install dependencies
-      run: npm ci
+      run: npm ci && npm update typescript
       working-directory: ./sindresorhus/refined-github
     - name: Link package
       run: |
