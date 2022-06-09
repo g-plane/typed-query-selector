@@ -42,11 +42,9 @@ type Split<S> = S extends `${string},` // invalid selector
 
 type Join<Seq> = Seq extends []
   ? ''
-  : Seq extends [infer Head, ...infer Rest]
-  ? Head extends string
+  : Seq extends [infer Head extends string, ...infer Rest]
     ? `${Head}${Join<Rest>}`
     : never
-  : never
 
 type Quotes = '"' | "'"
 
@@ -91,11 +89,9 @@ type ExpandFunctions<
   : I
 type Expander<Args, L extends string, R extends string> = Args extends []
   ? []
-  : Args extends [infer Head, ...infer Rest]
-  ? Head extends string
+  : Args extends [infer Head extends string, ...infer Rest]
     ? [`${L}${Head}${R},`, ...Expander<Rest, L, R>]
     : never
-  : never
 
 /** Check whether each tag is valid or not. */
 type Postprocess<

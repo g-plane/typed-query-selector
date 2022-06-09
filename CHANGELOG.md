@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Require TypeScript 4.7.
+
 ## v2.6.1
 
 - Fixed support of TypeScript 4.5.
