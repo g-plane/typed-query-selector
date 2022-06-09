@@ -10,12 +10,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Setup pnpm
-      uses: pnpm/action-setup@v1.2.1
+      uses: pnpm/action-setup@v2.2.2
       with:
-        version: 5.11.1
+        version: 7.1.9
         run_install: true
-    - name: Prettier check
-      run: pnpx prettier --check *.ts
+    # - name: Prettier check
+    #   run: pnpx prettier --check *.ts
     - name: Run tests
       run: pnpm test
   user_test:
