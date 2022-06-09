@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Require TypeScript 4.7.
+- Fixed invalid result after expanding `:is` or `:where` function. (Fix [#23](https://github.com/g-plane/typed-query-selector/issues/23))
 
 ## v2.6.1
 

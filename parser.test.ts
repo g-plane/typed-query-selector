@@ -292,4 +292,26 @@ type _Tests = [
     Equal<ParseSelector<'[aria-checked="true"]', HTMLElement>, HTMLElement>
   >,
   Expect<Equal<ParseSelector<'[data-scope]', HTMLElement>, HTMLElement>>,
+  Expect<
+    Equal<
+      ParseSelector<':is(a, button).x'>,
+      HTMLAnchorElement | HTMLButtonElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<'.x:is(a, button)'>,
+      HTMLAnchorElement | HTMLButtonElement
+    >
+  >,
+  Expect<Equal<ParseSelector<'div .x:is(a, button) h2'>, HTMLHeadingElement>>,
+  Expect<
+    Equal<
+      ParseSelector<'div:where(.a, .b), .x:is(a, button), h2#x'>,
+      | HTMLDivElement
+      | HTMLAnchorElement
+      | HTMLButtonElement
+      | HTMLHeadingElement
+    >
+  >,
 ]

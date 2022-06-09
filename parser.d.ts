@@ -90,7 +90,10 @@ type ExpandFunctions<
 type Expander<Args, L extends string, R extends string> = Args extends []
   ? []
   : Args extends [infer Head extends string, ...infer Rest]
-    ? [`${L}${Head}${R},`, ...Expander<Rest, L, R>]
+    // Selector can be `.x:is(a,button)`, so we strip subclasses before the `:is` or `:where` function,
+    // otherwise it would become `.xa,.xbutton` which is wrong.
+    //  |-- case for #23  --|
+    ? [`${PostprocessEach<L>}${Head}${R},`, ...Expander<Rest, L, R>]
     : never
 
 /** Check whether each tag is valid or not. */
