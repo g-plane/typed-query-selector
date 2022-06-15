@@ -43,8 +43,8 @@ type Split<S> = S extends `${string},` // invalid selector
 type Join<Seq> = Seq extends []
   ? ''
   : Seq extends [infer Head extends string, ...infer Rest]
-    ? `${Head}${Join<Rest>}`
-    : never
+  ? `${Head}${Join<Rest>}`
+  : never
 
 type Quotes = '"' | "'"
 
@@ -90,11 +90,11 @@ type ExpandFunctions<
 type Expander<Args, L extends string, R extends string> = Args extends []
   ? []
   : Args extends [infer Head extends string, ...infer Rest]
-    // Selector can be `.x:is(a,button)`, so we strip subclasses before the `:is` or `:where` function,
+  ? // Selector can be `.x:is(a,button)`, so we strip subclasses before the `:is` or `:where` function,
     // otherwise it would become `.xa,.xbutton` which is wrong.
-    //  |-- case for #23  --|
-    ? [`${PostprocessEach<L>}${Head}${R},`, ...Expander<Rest, L, R>]
-    : never
+    //|-- case for #23  --|
+    [`${PostprocessEach<L>}${Head}${R},`, ...Expander<Rest, L, R>]
+  : never
 
 /** Check whether each tag is valid or not. */
 type Postprocess<
