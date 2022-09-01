@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.7.0
+
 - Require TypeScript 4.7.
 - Fixed invalid result after expanding `:is` or `:where` function. (Fix [#23](https://github.com/g-plane/typed-query-selector/issues/23))
 
@@ -37,7 +39,7 @@
 
 - Fixed errors with disabled `skipLibCheck`.
 - Allowed to specify custom fallback type when failed to parse selector.
-(only for `ParseSelector` type, not for `querySelector` function)
+  (only for `ParseSelector` type, not for `querySelector` function)
 
 ## v2.3.0
 
@@ -82,8 +84,8 @@
 ## v2.0.0
 
 - **Breaking change**: `querySelector` and `querySelectorAll` from this package are removed.
-You just need to import this package then use `document.querySelector` normally.
-Check out readme for detailed usage.
+  You just need to import this package then use `document.querySelector` normally.
+  Check out readme for detailed usage.
 
 ## v1.1.0
 
