@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Export "strict" parser. (Close [#25](https://github.com/g-plane/typed-query-selector/issues/25))
+
 ## v2.7.0
 
 - Require TypeScript 4.7.

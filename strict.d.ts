@@ -59,29 +59,30 @@ type IsValidRestChars<S extends string> = S extends `${infer H}${infer Rest}`
     : false
   : true // no characters left, so it's OK
 
-type Parse<S extends string> = ParseSelectorToTagNames<S> extends infer Tags
-  ? Tags extends []
-    ? TagNameToElement<''>
-    : Tags extends string[]
-    ? IsValidTags<Tags> extends true
-      ? TagNameToElement<Tags[number]>
+export type ParseSelector<S extends string> =
+  ParseSelectorToTagNames<S> extends infer Tags
+    ? Tags extends []
+      ? TagNameToElement<''>
+      : Tags extends string[]
+      ? IsValidTags<Tags> extends true
+        ? TagNameToElement<Tags[number]>
+        : never
       : never
     : never
-  : never
 
 declare global {
   interface ParentNode {
-    querySelector<S extends string, E extends Parse<S>>(
+    querySelector<S extends string, E extends ParseSelector<S>>(
       selector: S,
     ): [E] extends [never] ? never : E | null
 
-    querySelectorAll<S extends string, E extends Parse<S>>(
+    querySelectorAll<S extends string, E extends ParseSelector<S>>(
       selector: S,
     ): [E] extends [never] ? never : NodeListOf<E>
   }
 
   interface Element {
-    closest<S extends string, E extends Parse<S>>(
+    closest<S extends string, E extends ParseSelector<S>>(
       selector: S,
     ): [E] extends [never] ? never : E | null
   }
