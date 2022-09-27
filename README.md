@@ -93,7 +93,10 @@ since such parser will become very complex and compilation performance may go ba
 If you just want to use the selector parser itself, we've exported for you:
 
 ```typescript
-import type { ParseSelector } from 'typed-query-selector/parser'
+import type {
+  ParseSelector,
+  StrictlyParseSelector, // or use the strict parser
+} from 'typed-query-selector/parser'
 
 type MyElement = ParseSelector<'form#login'>
 ```
