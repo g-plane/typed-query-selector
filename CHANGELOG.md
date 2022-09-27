@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Export "strict" parser. (Close [#25](https://github.com/g-plane/typed-query-selector/issues/25))
+- Removed exported private type `ParseSelectorToTagNames`.
 
 ## v2.7.0
 
