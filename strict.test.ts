@@ -35,6 +35,8 @@ const e31 = document.querySelector('div,')
 const e32 = document.querySelector('div, .badge')
 const e33 = document.querySelector('div, .')
 const e34 = document.querySelector('')
+const e35 = document.querySelector('..(octicon-tag ~~ span')
+const e36 = document.querySelector('a:not(.link))')
 
 type Tests = [
   Expect<Equal<typeof e1, Element | null>>,
@@ -71,6 +73,8 @@ type Tests = [
   Expect<Equal<typeof e32, HTMLDivElement | Element | null>>,
   Expect<Equal<typeof e33, never>>,
   Expect<Equal<typeof e34, never>>,
+  Expect<Equal<typeof e35, never>>,
+  Expect<Equal<typeof e36, never>>,
 ]
 
 // @ts-expect-error
