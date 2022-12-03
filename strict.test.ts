@@ -36,6 +36,11 @@ const e32 = document.querySelector('div, .badge')
 const e33 = document.querySelector('div, .')
 const e34 = document.querySelector('')
 
+const constantSelector = 'p a.lnk'
+let variableSelector = 'p a.lnk'
+const e35 = document.querySelector(`${constantSelector}`)
+const e36 = document.querySelector(`${variableSelector}`)
+
 type Tests = [
   Expect<Equal<typeof e1, Element | null>>,
   Expect<Equal<typeof e2, Element | null>>,
@@ -71,6 +76,8 @@ type Tests = [
   Expect<Equal<typeof e32, HTMLDivElement | Element | null>>,
   Expect<Equal<typeof e33, never>>,
   Expect<Equal<typeof e34, never>>,
+  Expect<Equal<typeof e35, HTMLAnchorElement | null>>,
+  Expect<Equal<typeof e36, Element | null>>,
 ]
 
 // @ts-expect-error
