@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed passing `string` type as argument in strict parser.
+
 ## v2.8.0
 
 - Export "strict" parser. (Close [#25](https://github.com/g-plane/typed-query-selector/issues/25))
