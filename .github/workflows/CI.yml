@@ -14,8 +14,8 @@ jobs:
       with:
         version: 7.1.9
         run_install: true
-    # - name: Prettier check
-    #   run: pnpx prettier --check *.ts
+    - name: Prettier check
+      run: pnpx prettier --check *.ts
     - name: Run tests
       run: pnpm test
   user_test:
