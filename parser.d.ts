@@ -102,12 +102,10 @@ type Postprocess<
   R extends string[] = [],
 > = Tags extends []
   ? R
-  : Tags extends [infer H, ...infer Rest]
+  : Tags extends [infer H, ...infer Rest extends string[]]
   ? PostprocessEach<GetLastTag<H>> extends infer T
     ? T extends string
-      ? Rest extends string[]
-        ? Postprocess<Rest, [...R, T]>
-        : never
+      ? Postprocess<Rest, [...R, T]>
       : unknown
     : never
   : Tags
