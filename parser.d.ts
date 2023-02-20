@@ -82,7 +82,7 @@ type ExpandFunctions<
   Right extends string = '',
 > = I extends `${infer L}:${infer Pseudo}(${infer Args})${infer R}`
   ? Pseudo extends 'is' | 'where'
-    ? ExpandFunctions<R, Args, [...LeftParts, L], R>
+    ? ExpandFunctions<R, Trim<Args>, [...LeftParts, L], R>
     : ExpandFunctions<`${L}${R}`, Seen, LeftParts, R>
   : Join<Expander<Split<Seen>, Join<LeftParts>, Right>> extends `${infer S},`
   ? S

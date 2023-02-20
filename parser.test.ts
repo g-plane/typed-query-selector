@@ -314,4 +314,11 @@ type _Tests = [
       | HTMLHeadingElement
     >
   >,
+  Expect<
+    Equal<
+      ParseSelector<`a:is(
+[href*="/issues"], [href*="/pulls"], [href*="/projects"], [href*="/labels/"]):not([href*="sort%3A"], .issues-reset-query)`>,
+      HTMLAnchorElement
+    >
+  >,
 ]
