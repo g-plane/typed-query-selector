@@ -77,23 +77,22 @@ type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escap
 /** Parse `:is()` and `:where()` */
 type ExpandFunctions<
   I,
-  Seen = '',
+  Seen extends string = '',
   LeftParts extends string[] = [],
   Right extends string = '',
 > = I extends `${infer L}:${infer Pseudo}(${infer Args})${infer R}`
   ? Pseudo extends 'is' | 'where'
     ? ExpandFunctions<R, Trim<Args>, [...LeftParts, L], R>
     : ExpandFunctions<`${L}${R}`, Seen, LeftParts, R>
-  : Join<Expander<Split<Seen>, Join<LeftParts>, Right>> extends `${infer S},`
+  : Join<
+      Expander<Split<Seen>, PostprocessEach<Join<LeftParts>>, Right>
+    > extends `${infer S},`
   ? S
   : I
 type Expander<Args, L extends string, R extends string> = Args extends []
   ? []
   : Args extends [infer Head extends string, ...infer Rest]
-  ? // Selector can be `.x:is(a,button)`, so we strip subclasses before the `:is` or `:where` function,
-    // otherwise it would become `.xa,.xbutton` which is wrong.
-    //|-- case for #23  --|
-    [`${PostprocessEach<L>}${Head}${R},`, ...Expander<Rest, L, R>]
+  ? [`${L}&${Head}${R},`, ...Expander<Rest, L, R>]
   : never
 
 /** Check whether each tag is valid or not. */
@@ -143,9 +142,29 @@ export type ParseSelector<
   ? TagNames extends []
     ? TagNameToElement<'', Fallback>
     : TagNames extends string[]
-    ? TagNameToElement<TagNames[number], Fallback>
+    ? FromTagNamesToElements<TagNames, Fallback, never>
     : Fallback
   : never
+
+type FromTagNamesToElements<
+  Tags extends string[],
+  Fallback extends Element,
+  Result extends Element,
+> = Tags extends []
+  ? Result
+  : Tags extends [infer Head extends string, ...infer Rest extends string[]]
+  ? FromTagNamesToElements<Rest, Fallback, Result | ExpandAnd<Head, Fallback>>
+  : never
+type ExpandAnd<
+  I extends string,
+  Fallback extends Element,
+> = I extends `${infer L}&${'' | '*'}`
+  ? TagNameToElement<L, Fallback>
+  : I extends `${'' | '*'}&${infer R}`
+  ? TagNameToElement<R>
+  : I extends `${infer L}&${infer R}`
+  ? TagNameToElement<L, Fallback> & TagNameToElement<R, Fallback>
+  : TagNameToElement<I, Fallback>
 
 export type TagNameToElement<
   Tag extends string,

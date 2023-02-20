@@ -1,5 +1,5 @@
 import type { Equal, Expect, NotEqual } from '@type-challenges/utils'
-import type { ParseSelector, ParseSelectorToTagNames } from './parser'
+import type { ParseSelector } from './parser'
 
 declare class DefinedWebComponent extends HTMLElement {
   #brand
@@ -12,8 +12,6 @@ declare global {
 }
 
 type _Tests = [
-  Expect<Equal<ParseSelectorToTagNames<''>, unknown>>,
-  Expect<Equal<ParseSelectorToTagNames<'*'>, ['*']>>,
   Expect<Equal<ParseSelector<''>, Element>>,
   Expect<Equal<ParseSelector<'*'>, Element>>,
   Expect<Equal<ParseSelector<string>, Element>>,
@@ -321,4 +319,14 @@ type _Tests = [
       HTMLAnchorElement
     >
   >,
+  Expect<
+    Equal<ParseSelector<'a.status-actions:is([href^="/"])'>, HTMLAnchorElement>
+  >,
+  Expect<
+    Equal<ParseSelector<'a.status-actions:is(a[href^="/"])'>, HTMLAnchorElement>
+  >,
+  Expect<Equal<ParseSelector<'a:is(*)'>, HTMLAnchorElement>>,
+  Expect<Equal<ParseSelector<'a:is(.c)'>, HTMLAnchorElement>>,
+  Expect<Equal<ParseSelector<'a:is(a.c)'>, HTMLAnchorElement>>,
+  Expect<Equal<ParseSelector<'.c:is(a)'>, HTMLAnchorElement>>,
 ]

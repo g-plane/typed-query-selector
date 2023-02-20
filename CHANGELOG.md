@@ -3,7 +3,7 @@
 ## Unreleased
 
 - Fixed passing `string` type as argument in strict parser.
-- Fixed whitespaces in `:is()` and `:where()`.
+- Fixed some cases `:is()` and `:where()`.
 
 ## v2.8.0
 
