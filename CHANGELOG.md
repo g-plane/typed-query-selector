@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.9.0
+
 - Added fallback support to strict parser.
 - Fallback to `HTMLElement` for `HTMLElement`, `Document` and `DocumentFragment`. (Close [#29](https://github.com/g-plane/typed-query-selector/issues/29))
 
