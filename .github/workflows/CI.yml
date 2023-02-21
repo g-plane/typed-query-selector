@@ -21,6 +21,7 @@ jobs:
   user_test:
     name: User Test
     runs-on: ubuntu-latest
+    if: false # disable temporarily until they update "typed-query-selector"
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
