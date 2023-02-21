@@ -41,17 +41,23 @@ let variableSelector = 'p a.lnk'
 const e35 = document.querySelector(`${constantSelector}`)
 const e36 = document.querySelector(`${variableSelector}`)
 
+declare let element: Element
+const e37 = element.querySelector('unknown')
+
+declare let btn: HTMLButtonElement
+const e38 = btn.querySelector('unknown')
+
 type Tests = [
-  Expect<Equal<typeof e1, Element | null>>,
-  Expect<Equal<typeof e2, Element | null>>,
-  Expect<Equal<typeof e3, Element | null>>,
-  Expect<Equal<typeof e4, Element | null>>,
+  Expect<Equal<typeof e1, HTMLElement | null>>,
+  Expect<Equal<typeof e2, HTMLElement | null>>,
+  Expect<Equal<typeof e3, HTMLElement | null>>,
+  Expect<Equal<typeof e4, HTMLElement | null>>,
   Expect<Equal<typeof e5, never>>,
   Expect<Equal<typeof e6, never>>,
   Expect<Equal<typeof e7, never>>,
   Expect<Equal<typeof e8, never>>,
-  Expect<Equal<typeof e9, Element | null>>,
-  Expect<Equal<typeof e10, Element | null>>,
+  Expect<Equal<typeof e9, HTMLElement | null>>,
+  Expect<Equal<typeof e10, HTMLElement | null>>,
   Expect<Equal<typeof e11, never>>,
   Expect<Equal<typeof e12, never>>,
   Expect<Equal<typeof e13, never>>,
@@ -60,24 +66,26 @@ type Tests = [
   Expect<Equal<typeof e16, HTMLDivElement | null>>,
   Expect<Equal<typeof e17, HTMLSpanElement | null>>,
   Expect<Equal<typeof e18, never>>,
-  Expect<Equal<typeof e19, Element | null>>,
+  Expect<Equal<typeof e19, HTMLElement | null>>,
   Expect<Equal<typeof e20, never>>,
-  Expect<Equal<typeof e21, Element | null>>,
-  Expect<Equal<typeof e22, Element | null>>,
-  Expect<Equal<typeof e23, Element | null>>,
-  Expect<Equal<typeof e24, Element | null>>,
-  Expect<Equal<typeof e25, Element | null>>,
+  Expect<Equal<typeof e21, HTMLElement | null>>,
+  Expect<Equal<typeof e22, HTMLElement | null>>,
+  Expect<Equal<typeof e23, HTMLElement | null>>,
+  Expect<Equal<typeof e24, HTMLElement | null>>,
+  Expect<Equal<typeof e25, HTMLElement | null>>,
   Expect<Equal<typeof e26, never>>,
   Expect<Equal<typeof e27, never>>,
   Expect<Equal<typeof e28, HTMLDivElement | HTMLSpanElement | null>>,
   Expect<Equal<typeof e29, never>>,
   Expect<Equal<typeof e30, never>>,
   Expect<Equal<typeof e31, never>>,
-  Expect<Equal<typeof e32, HTMLDivElement | Element | null>>,
+  Expect<Equal<typeof e32, HTMLDivElement | HTMLElement | null>>,
   Expect<Equal<typeof e33, never>>,
   Expect<Equal<typeof e34, never>>,
   Expect<Equal<typeof e35, HTMLAnchorElement | null>>,
-  Expect<Equal<typeof e36, Element | null>>,
+  Expect<Equal<typeof e36, HTMLElement | null>>,
+  Expect<Equal<typeof e37, Element | null>>,
+  Expect<Equal<typeof e38, HTMLElement | null>>,
 ]
 
 // @ts-expect-error
