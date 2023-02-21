@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Setup pnpm
       uses: pnpm/action-setup@v2.2.2
       with:
@@ -23,17 +23,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: ./g-plane/typed-query-selector
     - name: Checkout "refined-github"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: sindresorhus/refined-github
-        ref: 50c6fafc9692daa97daf894b5af5d4acb0caf7d8
+        ref: 60ac04e85cdb0c597e90d3d314ad6fb4c1fe4d8d
         path: ./sindresorhus/refined-github
     - name: Install dependencies
-      run: npm ci && npm update typescript
+      run: npm ci
       working-directory: ./sindresorhus/refined-github
     - name: Link package
       run: |
