@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added fallback support to strict parser.
+
 ## v2.8.1
 
 - Fixed passing `string` type as argument in strict parser.

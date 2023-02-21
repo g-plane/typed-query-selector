@@ -238,14 +238,17 @@ type IsValidRestChars<S extends string> = S extends `${infer H}${infer Rest}`
     : false
   : true // no characters left, so it's OK
 
-export type StrictlyParseSelector<S extends string> = string extends S
-  ? Element
+export type StrictlyParseSelector<
+  S extends string,
+  Fallback extends Element = Element,
+> = string extends S
+  ? Fallback
   : ParseSelectorToTagNames<S> extends infer Tags
   ? Tags extends []
-    ? TagNameToElement<''>
+    ? TagNameToElement<'', Fallback>
     : Tags extends string[]
     ? IsValidTags<Tags> extends true
-      ? TagNameToElement<Tags[number]>
+      ? TagNameToElement<Tags[number], Fallback>
       : never
     : never
   : never
