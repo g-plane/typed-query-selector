@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.8.1
+
 - Fixed passing `string` type as argument in strict parser.
 - Fixed some cases `:is()` and `:where()`.
 
