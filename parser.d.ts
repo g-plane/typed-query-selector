@@ -34,17 +34,19 @@ type PseudoClassesFirstChar =
 
 type Split<S> = S extends `${string},` // invalid selector
   ? unknown
+  : SplitRec<S, []>
+type SplitRec<S, Acc extends any[]> = S extends `${infer Left},${infer Right}`
+  ? SplitRec<Right, [...Acc, Left]>
   : S extends ''
-  ? []
-  : S extends `${infer Left},${infer Right}`
-  ? [Left, ...Split<Right>]
-  : [S]
+  ? Acc
+  : SplitRec<'', [...Acc, S]>
 
-type Join<Seq> = Seq extends []
-  ? ''
-  : Seq extends [infer Head extends string, ...infer Rest]
-  ? `${Head}${Join<Rest>}`
-  : never
+type Join<Seq, Acc extends string = ''> = Seq extends [
+  infer Head extends string,
+  ...infer Rest,
+]
+  ? Join<Rest, `${Acc}${Head}`>
+  : Acc
 
 type Quotes = '"' | "'"
 
@@ -62,16 +64,17 @@ type PreprocessGrouping<I> = I extends `${infer L}, ${infer R}`
   ? PreprocessGrouping<`${L},${R}`>
   : I
 
-type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
-  ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}"${string}"${infer R}` // remove quoted content in attribute
-  ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
-  ? Preprocess<`${L}${R}`>
-  : I extends `${string}[]${string}` // invalid selector
+type Preprocess<I> = I extends `${string}[]${string}` // invalid selector
   ? unknown
+  : PreprocessUnchecked<I>
+type PreprocessUnchecked<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
+  ? PreprocessUnchecked<`${L}${R}`>
+  : I extends `${infer L}"${string}"${infer R}` // remove quoted content in attribute
+  ? PreprocessUnchecked<`${L}${R}`>
+  : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
+  ? PreprocessUnchecked<`${L}${R}`>
   : I extends `${infer L}[${string}]${infer R}` // process attribute
-  ? Preprocess<`${L}#x${R}`> // replace it with a fake ID selector
+  ? PreprocessUnchecked<`${L}#x${R}`> // replace it with a fake ID selector
   : I
 
 /** Parse `:is()` and `:where()` */
@@ -99,28 +102,27 @@ type Expander<Args, L extends string, R extends string> = Args extends []
 type Postprocess<
   Tags extends string[],
   R extends string[] = [],
-> = Tags extends []
-  ? R
-  : Tags extends [infer H, ...infer Rest extends string[]]
+> = Tags extends [infer H, ...infer Rest extends string[]]
   ? PostprocessEach<GetLastTag<H>> extends infer T
     ? T extends string
       ? Postprocess<Rest, [...R, T]>
       : unknown
     : never
-  : Tags
+  : R
 /** Postprocess each tag with simple validation. */
-type PostprocessEach<I> = I extends `${infer Tag}.${infer Rest}`
-  ? Rest extends '' // this can't be empty
-    ? unknown
-    : PostprocessEach<Tag>
-  : I extends `${infer Tag}#${infer Rest}`
-  ? Rest extends '' // this can't be empty
-    ? unknown
-    : PostprocessEach<Tag>
+type PostprocessEach<I> = I extends `${string}.` // invalid class selector
+  ? unknown
+  : I extends `${string}#` // invalid ID selector
+  ? unknown
+  : PostprocessEachUnchecked<I>
+type PostprocessEachUnchecked<I> = I extends `${infer Tag}.${string}`
+  ? PostprocessEachUnchecked<Tag>
+  : I extends `${infer Tag}#${string}`
+  ? PostprocessEachUnchecked<Tag>
   : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
-  ? PostprocessEach<Tag>
-  : I extends `${string}|${infer R}` // namespace prefix
-  ? PostprocessEach<R>
+  ? PostprocessEachUnchecked<Tag>
+  : I extends `${string}|${infer Tag}` // namespace prefix
+  ? PostprocessEachUnchecked<Tag>
   : I
 
 type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
