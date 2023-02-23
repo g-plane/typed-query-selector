@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed some cases of `:is()` and `:where()` by rewriting the expanding logic.
+
 ## v2.9.0
 
 - Added fallback support to strict parser.
@@ -10,7 +12,7 @@
 ## v2.8.1
 
 - Fixed passing `string` type as argument in strict parser.
-- Fixed some cases `:is()` and `:where()`.
+- Fixed some cases of `:is()` and `:where()`.
 
 ## v2.8.0
 

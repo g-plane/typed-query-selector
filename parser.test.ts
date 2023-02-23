@@ -329,4 +329,16 @@ type _Tests = [
   Expect<Equal<ParseSelector<'a:is(.c)'>, HTMLAnchorElement>>,
   Expect<Equal<ParseSelector<'a:is(a.c)'>, HTMLAnchorElement>>,
   Expect<Equal<ParseSelector<'.c:is(a)'>, HTMLAnchorElement>>,
+  Expect<
+    Equal<
+      ParseSelector<':is(p,button):is(.c)'>,
+      HTMLParagraphElement | HTMLButtonElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<':is(.js, .inline) a.author:not([href], [href])'>,
+      HTMLAnchorElement
+    >
+  >,
 ]

@@ -78,25 +78,13 @@ type PreprocessUnchecked<I> = I extends `${infer L}\\${Quotes}${infer R}` // rem
   : I
 
 /** Parse `:is()` and `:where()` */
-type ExpandFunctions<
-  I,
-  Seen extends string = '',
-  LeftParts extends string[] = [],
-  Right extends string = '',
-> = I extends `${infer L}:${infer Pseudo}(${infer Args})${infer R}`
-  ? Pseudo extends 'is' | 'where'
-    ? ExpandFunctions<R, Trim<Args>, [...LeftParts, L], R>
-    : ExpandFunctions<`${L}${R}`, Seen, LeftParts, R>
-  : Join<
-      Expander<Split<Seen>, PostprocessEach<Join<LeftParts>>, Right>
-    > extends `${infer S},`
-  ? S
+type ExpandFunctions<I> = I extends `${infer L}:is(${infer Args})${infer R}`
+  ? ExpandFunctions<`${L}&${Split<Trim<Args>>[number]}${R}`>
+  : I extends `${infer L}:where(${infer Args})${infer R}`
+  ? ExpandFunctions<`${L}&${Split<Trim<Args>>[number]}${R}`>
+  : I extends `${infer L}:${string}(${string})${infer R}`
+  ? ExpandFunctions<`${L}${R}`>
   : I
-type Expander<Args, L extends string, R extends string> = Args extends []
-  ? []
-  : Args extends [infer Head extends string, ...infer Rest]
-  ? [`${L}&${Head}${R},`, ...Expander<Rest, L, R>]
-  : never
 
 /** Check whether each tag is valid or not. */
 type Postprocess<
@@ -115,15 +103,22 @@ type PostprocessEach<I> = I extends `${string}.` // invalid class selector
   : I extends `${string}#` // invalid ID selector
   ? unknown
   : PostprocessEachUnchecked<I>
-type PostprocessEachUnchecked<I> = I extends `${infer Tag}.${string}`
-  ? PostprocessEachUnchecked<Tag>
-  : I extends `${infer Tag}#${string}`
-  ? PostprocessEachUnchecked<Tag>
-  : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
-  ? PostprocessEachUnchecked<Tag>
-  : I extends `${string}|${infer Tag}` // namespace prefix
-  ? PostprocessEachUnchecked<Tag>
-  : I
+type PostprocessEachUnchecked<I> =
+  I extends `${infer Tag}.${string}&${infer Rest}`
+    ? PostprocessEachUnchecked<`${Tag}&${Rest}`>
+    : I extends `${infer Tag}.${string}`
+    ? PostprocessEachUnchecked<Tag>
+    : I extends `${infer Tag}#${string}&${infer Rest}`
+    ? PostprocessEachUnchecked<`${Tag}&${Rest}`>
+    : I extends `${infer Tag}#${string}`
+    ? PostprocessEachUnchecked<Tag>
+    : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}&${infer Rest}`
+    ? PostprocessEachUnchecked<`${Tag}&${Rest}`>
+    : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
+    ? PostprocessEachUnchecked<Tag>
+    : I extends `${string}|${infer Tag}` // namespace prefix
+    ? PostprocessEachUnchecked<Tag>
+    : I
 
 type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
   ? I extends ''
@@ -155,18 +150,26 @@ type FromTagNamesToElements<
 > = Tags extends []
   ? Result
   : Tags extends [infer Head extends string, ...infer Rest extends string[]]
-  ? FromTagNamesToElements<Rest, Fallback, Result | ExpandAnd<Head, Fallback>>
+  ? FromTagNamesToElements<
+      Rest,
+      Fallback,
+      | Result
+      | (Head extends `${string}&${string}`
+          ? ExpandAnd<Head, Fallback>
+          : TagNameToElement<Head, Fallback>)
+    >
   : never
 type ExpandAnd<
   I extends string,
   Fallback extends Element,
-> = I extends `${infer L}&${'' | '*'}`
-  ? TagNameToElement<L, Fallback>
-  : I extends `${'' | '*'}&${infer R}`
-  ? TagNameToElement<R>
-  : I extends `${infer L}&${infer R}`
-  ? TagNameToElement<L, Fallback> & TagNameToElement<R, Fallback>
-  : TagNameToElement<I, Fallback>
+  Result extends Element | unknown = unknown,
+> = I extends `${'' | '*'}&${infer Rest}`
+  ? ExpandAnd<Rest, Fallback, Result>
+  : I extends `${infer Tag}&${infer Rest}`
+  ? ExpandAnd<Rest, Fallback, Result & TagNameToElement<Tag, Fallback>>
+  : I extends '' | '*'
+  ? Result
+  : ExpandAnd<'', Fallback, Result & TagNameToElement<I, Fallback>>
 
 export type TagNameToElement<
   Tag extends string,
