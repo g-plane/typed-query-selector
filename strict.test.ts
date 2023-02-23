@@ -47,6 +47,9 @@ const e37 = element.querySelector('unknown')
 declare let btn: HTMLButtonElement
 const e38 = btn.querySelector('unknown')
 
+declare let dynamicPart: string
+const e39 = document.querySelector(`:is(${dynamicPart}):not(.blob-code-hunk)`)
+
 type Tests = [
   Expect<Equal<typeof e1, HTMLElement | null>>,
   Expect<Equal<typeof e2, HTMLElement | null>>,
@@ -86,6 +89,7 @@ type Tests = [
   Expect<Equal<typeof e36, HTMLElement | null>>,
   Expect<Equal<typeof e37, Element | null>>,
   Expect<Equal<typeof e38, HTMLElement | null>>,
+  Expect<Equal<typeof e39, HTMLElement | null>>,
 ]
 
 // @ts-expect-error

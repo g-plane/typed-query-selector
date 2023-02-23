@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fixed some cases of `:is()` and `:where()` by rewriting the expanding logic.
+- Fixed template with dynamic interpolation.
 
 ## v2.9.0
 

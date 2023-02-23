@@ -139,14 +139,14 @@ export type ParseSelector<
   ? TagNames extends []
     ? TagNameToElement<'', Fallback>
     : TagNames extends string[]
-    ? FromTagNamesToElements<TagNames, Fallback, never>
+    ? FromTagNamesToElements<TagNames, Fallback>
     : Fallback
   : never
 
 type FromTagNamesToElements<
   Tags extends string[],
   Fallback extends Element,
-  Result extends Element,
+  Result extends Element = never,
 > = Tags extends []
   ? Result
   : Tags extends [infer Head extends string, ...infer Rest extends string[]]
@@ -225,17 +225,28 @@ type IdentifierFirstChar =
   | '_'
 type IdentifierChar = IdentifierFirstChar | Digit
 
-type IsValidTags<S> = S extends [infer H, ...infer Rest]
-  ? H extends '' | '*'
-    ? IsValidTags<Rest>
-    : IsValidTagName<H> extends true
+type IsValidTags<S extends string[]> = S extends [
+  infer Head extends string,
+  ...infer Rest extends string[],
+]
+  ? IsValidTagsWithAnd<Head> extends true
     ? IsValidTags<Rest>
     : false
   : true
-type IsValidTagName<S> = S extends `${infer H}${infer Rest}`
+type IsValidTagsWithAnd<S extends string> =
+  S extends `${infer Head}&${infer Rest}`
+    ? IsValidTagName<Head> extends true
+      ? IsValidTagsWithAnd<Rest>
+      : false
+    : IsValidTagName<S>
+type IsValidTagName<S> = S extends '' | '*'
+  ? true
+  : S extends `${infer H}${infer Rest}`
   ? H extends IdentifierFirstChar
     ? IsValidRestChars<Rest>
     : false
+  : string extends S
+  ? true
   : false
 type IsValidRestChars<S extends string> = S extends `${infer H}${infer Rest}`
   ? H extends IdentifierChar
@@ -253,7 +264,7 @@ export type StrictlyParseSelector<
     ? TagNameToElement<'', Fallback>
     : Tags extends string[]
     ? IsValidTags<Tags> extends true
-      ? TagNameToElement<Tags[number], Fallback>
+      ? FromTagNamesToElements<Tags, Fallback>
       : never
     : never
   : never

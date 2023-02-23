@@ -341,4 +341,5 @@ type _Tests = [
       HTMLAnchorElement
     >
   >,
+  Expect<Equal<ParseSelector<`:is(${string}):not(.blob-code-hunk)`>, Element>>,
 ]
