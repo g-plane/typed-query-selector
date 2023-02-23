@@ -342,4 +342,16 @@ type _Tests = [
     >
   >,
   Expect<Equal<ParseSelector<`:is(${string}):not(.blob-code-hunk)`>, Element>>,
+  Expect<
+    Equal<
+      ParseSelector<'.Layout-sidebar :is(.BorderGrid, #partial-discussion-sidebar)'>,
+      Element
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<`#dashboard :is(.watch_started, .fork)${string}`>,
+      Element
+    >
+  >,
 ]

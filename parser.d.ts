@@ -120,24 +120,30 @@ export type ParseSelector<
   I extends string,
   Fallback extends Element = Element,
 > = ParseSelectorToTagNames<I> extends infer TagNames
-  ? TagNames extends `${string}&${string}`
+  ? TagNames extends string
     ? ExpandAnd<TagNames, Fallback>
-    : TagNames extends string
-    ? TagNameToElement<TagNames, Fallback>
     : Fallback
   : never
 
-type ExpandAnd<
+type ExpandAnd<I extends string, Fallback extends Element> = ExpandAndInner<
+  I,
+  Fallback
+> extends infer Result
+  ? unknown extends Result
+    ? Fallback
+    : Result
+  : never
+type ExpandAndInner<
   I extends string,
   Fallback extends Element,
   Result extends Element | unknown = unknown,
 > = I extends `${'' | '*'}&${infer Rest}`
-  ? ExpandAnd<Rest, Fallback, Result>
+  ? ExpandAndInner<Rest, Fallback, Result>
   : I extends `${infer Tag}&${infer Rest}`
-  ? ExpandAnd<Rest, Fallback, Result & TagNameToElement<Tag, Fallback>>
+  ? ExpandAndInner<Rest, Fallback, Result & TagNameToElement<Tag, Fallback>>
   : I extends '' | '*'
   ? Result
-  : ExpandAnd<'', Fallback, Result & TagNameToElement<I, Fallback>>
+  : ExpandAndInner<'', Fallback, Result & TagNameToElement<I, Fallback>>
 
 export type TagNameToElement<
   Tag extends string,
@@ -226,10 +232,8 @@ export type StrictlyParseSelector<
   ? Fallback
   : ParseSelectorToTagNames<S> extends infer Tags
   ? IsValidTags<Tags> extends true
-    ? Tags extends `${string}&${string}`
+    ? Tags extends string
       ? ExpandAnd<Tags, Fallback>
-      : Tags extends string
-      ? TagNameToElement<Tags, Fallback>
       : never
     : never
   : never
