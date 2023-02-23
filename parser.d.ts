@@ -34,19 +34,12 @@ type PseudoClassesFirstChar =
 
 type Split<S> = S extends `${string},` // invalid selector
   ? unknown
-  : SplitRec<S, []>
-type SplitRec<S, Acc extends any[]> = S extends `${infer Left},${infer Right}`
-  ? SplitRec<Right, [...Acc, Left]>
+  : SplitRec<S>
+type SplitRec<S, Acc = never> = S extends `${infer Left},${infer Right}`
+  ? SplitRec<Right, Acc | Left>
   : S extends ''
   ? Acc
-  : SplitRec<'', [...Acc, S]>
-
-type Join<Seq, Acc extends string = ''> = Seq extends [
-  infer Head extends string,
-  ...infer Rest,
-]
-  ? Join<Rest, `${Acc}${Head}`>
-  : Acc
+  : SplitRec<'', Acc | S>
 
 type Quotes = '"' | "'"
 
@@ -79,24 +72,21 @@ type PreprocessUnchecked<I> = I extends `${infer L}\\${Quotes}${infer R}` // rem
 
 /** Parse `:is()` and `:where()` */
 type ExpandFunctions<I> = I extends `${infer L}:is(${infer Args})${infer R}`
-  ? ExpandFunctions<`${L}&${Split<Trim<Args>>[number]}${R}`>
+  ? ExpandFunctions<`${L}&${Split<Trim<Args>>}${R}`>
   : I extends `${infer L}:where(${infer Args})${infer R}`
-  ? ExpandFunctions<`${L}&${Split<Trim<Args>>[number]}${R}`>
-  : I extends `${infer L}:${string}(${string})${infer R}`
-  ? ExpandFunctions<`${L}${R}`>
+  ? ExpandFunctions<`${L}&${Split<Trim<Args>>}${R}`>
+  : I extends `${infer L}:${infer Pseudo}(${string})${infer R}`
+  ? IsIdentifier<Pseudo> extends true
+    ? ExpandFunctions<`${L}${R}`>
+    : I
   : I
 
 /** Check whether each tag is valid or not. */
-type Postprocess<
-  Tags extends string[],
-  R extends string[] = [],
-> = Tags extends [infer H, ...infer Rest extends string[]]
-  ? PostprocessEach<GetLastTag<H>> extends infer T
-    ? T extends string
-      ? Postprocess<Rest, [...R, T]>
-      : unknown
-    : never
-  : R
+type Postprocess<Tags> = PostprocessEach<GetLastTag<Tags>> extends infer T
+  ? T extends string
+    ? T
+    : unknown
+  : never
 /** Postprocess each tag with simple validation. */
 type PostprocessEach<I> = I extends `${string}.` // invalid class selector
   ? unknown
@@ -123,42 +113,20 @@ type PostprocessEachUnchecked<I> =
 type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
   ? I extends ''
     ? unknown
-    : Split<
-        ExpandFunctions<Preprocess<PreprocessGrouping<I>>>
-      > extends infer PreprocessedTagNames
-    ? PreprocessedTagNames extends string[]
-      ? Postprocess<PreprocessedTagNames>
-      : unknown
-    : never
-  : never
+    : Postprocess<Split<ExpandFunctions<Preprocess<PreprocessGrouping<I>>>>>
+  : unknown
 
 export type ParseSelector<
   I extends string,
   Fallback extends Element = Element,
 > = ParseSelectorToTagNames<I> extends infer TagNames
-  ? TagNames extends []
-    ? TagNameToElement<'', Fallback>
-    : TagNames extends string[]
-    ? FromTagNamesToElements<TagNames, Fallback>
+  ? TagNames extends `${string}&${string}`
+    ? ExpandAnd<TagNames, Fallback>
+    : TagNames extends string
+    ? TagNameToElement<TagNames, Fallback>
     : Fallback
   : never
 
-type FromTagNamesToElements<
-  Tags extends string[],
-  Fallback extends Element,
-  Result extends Element = never,
-> = Tags extends []
-  ? Result
-  : Tags extends [infer Head extends string, ...infer Rest extends string[]]
-  ? FromTagNamesToElements<
-      Rest,
-      Fallback,
-      | Result
-      | (Head extends `${string}&${string}`
-          ? ExpandAnd<Head, Fallback>
-          : TagNameToElement<Head, Fallback>)
-    >
-  : never
 type ExpandAnd<
   I extends string,
   Fallback extends Element,
@@ -225,20 +193,17 @@ type IdentifierFirstChar =
   | '_'
 type IdentifierChar = IdentifierFirstChar | Digit
 
-type IsValidTags<S extends string[]> = S extends [
-  infer Head extends string,
-  ...infer Rest extends string[],
-]
-  ? IsValidTagsWithAnd<Head> extends true
+type IsIdentifier<S> = S extends `${infer FirstChar}${infer Rest}`
+  ? FirstChar extends IdentifierFirstChar
+    ? IsValidRestChars<Rest>
+    : false
+  : false
+
+type IsValidTags<S> = S extends `${infer Head}&${infer Rest}`
+  ? IsValidTagName<Head> extends true
     ? IsValidTags<Rest>
     : false
-  : true
-type IsValidTagsWithAnd<S extends string> =
-  S extends `${infer Head}&${infer Rest}`
-    ? IsValidTagName<Head> extends true
-      ? IsValidTagsWithAnd<Rest>
-      : false
-    : IsValidTagName<S>
+  : IsValidTagName<S>
 type IsValidTagName<S> = S extends '' | '*'
   ? true
   : S extends `${infer H}${infer Rest}`
@@ -260,11 +225,11 @@ export type StrictlyParseSelector<
 > = string extends S
   ? Fallback
   : ParseSelectorToTagNames<S> extends infer Tags
-  ? Tags extends []
-    ? TagNameToElement<'', Fallback>
-    : Tags extends string[]
-    ? IsValidTags<Tags> extends true
-      ? FromTagNamesToElements<Tags, Fallback>
+  ? IsValidTags<Tags> extends true
+    ? Tags extends `${string}&${string}`
+      ? ExpandAnd<Tags, Fallback>
+      : Tags extends string
+      ? TagNameToElement<Tags, Fallback>
       : never
     : never
   : never
