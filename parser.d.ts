@@ -125,6 +125,12 @@ export type ParseSelector<
     : Fallback
   : never
 
+/**
+ * Wrapper for `...&...` syntax expander.
+ *
+ * `&` is valid, but the expander will return the default result which is `unknown`,
+ * so we must check the result and if it's `unknown` we will turn it into `Fallback`.
+ */
 type ExpandAnd<I extends string, Fallback extends Element> = ExpandAndInner<
   I,
   Fallback
@@ -133,6 +139,12 @@ type ExpandAnd<I extends string, Fallback extends Element> = ExpandAndInner<
     ? Fallback
     : Result
   : never
+/**
+ * Actually expand the `...&...` syntax.
+ *
+ * The reason why we choose `unknown` as initial type is
+ * that `unknown & T` equals to `T`.
+ */
 type ExpandAndInner<
   I extends string,
   Fallback extends Element,
