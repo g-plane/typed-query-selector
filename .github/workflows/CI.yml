@@ -21,7 +21,6 @@ jobs:
   user_test:
     name: User Test
     runs-on: ubuntu-latest
-    if: false # disable temporarily until they update "typed-query-selector"
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -31,7 +30,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: sindresorhus/refined-github
-        ref: 60ac04e85cdb0c597e90d3d314ad6fb4c1fe4d8d
+        ref: 6e1be0b732b272b3bf58c4db0d9d76fb8ed5c11e
         path: ./sindresorhus/refined-github
     - name: Install dependencies
       run: npm ci
