@@ -9,7 +9,7 @@ type TestEl = Expect<
 >
 
 declare let selector: string
-const link = document.querySelector<string, HTMLAnchorElement>(selector)
+const link = document.querySelector<HTMLAnchorElement>(selector)
 type TestLink = Expect<Equal<typeof link, HTMLAnchorElement | null>>
 
 // @ts-expect-error
@@ -40,3 +40,11 @@ const elementOfElement = element.querySelector('unknown')
 type TestElementOfElement = Expect<
   Equal<typeof elementOfElement, Element | null>
 >
+
+declare let documentFragment: DocumentFragment
+document.querySelector<Element>('my-web-component')
+document.querySelectorAll<Element>('my-web-component')
+element.querySelector<Element>('my-web-component')
+element.querySelectorAll<Element>('my-web-component')
+documentFragment.querySelector<Element>('my-web-component')
+documentFragment.querySelectorAll<Element>('my-web-component')

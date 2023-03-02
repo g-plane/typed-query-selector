@@ -17,10 +17,14 @@ declare global {
     querySelector<S extends string>(
       selector: S,
     ): ParseSelector<S, HTMLElement> | null
+    querySelector<E extends Element = Element>(selector: string): E | null
 
     querySelectorAll<S extends string>(
       selector: S,
     ): NodeListOf<ParseSelector<S, HTMLElement>>
+    querySelectorAll<E extends Element = Element>(
+      selector: string,
+    ): NodeListOf<E>
 
     closest<S extends string>(selector: S): ParseSelector<S, HTMLElement> | null
   }
@@ -29,19 +33,27 @@ declare global {
     querySelector<S extends string>(
       selector: S,
     ): ParseSelector<S, HTMLElement> | null
+    querySelector<E extends Element = Element>(selector: string): E | null
 
     querySelectorAll<S extends string>(
       selector: S,
     ): NodeListOf<ParseSelector<S, HTMLElement>>
+    querySelectorAll<E extends Element = Element>(
+      selector: string,
+    ): NodeListOf<E>
   }
 
   interface DocumentFragment {
     querySelector<S extends string>(
       selector: S,
     ): ParseSelector<S, HTMLElement> | null
+    querySelector<E extends Element = Element>(selector: string): E | null
 
     querySelectorAll<S extends string>(
       selector: S,
     ): NodeListOf<ParseSelector<S, HTMLElement>>
+    querySelectorAll<E extends Element = Element>(
+      selector: string,
+    ): NodeListOf<E>
   }
 }

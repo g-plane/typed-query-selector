@@ -24,6 +24,7 @@ declare global {
     >(
       selector: S,
     ): [E] extends [never] ? never : E | null
+    querySelector<E extends Element = Element>(selector: string): E | null
 
     querySelectorAll<
       S extends string,
@@ -31,6 +32,9 @@ declare global {
     >(
       selector: S,
     ): [E] extends [never] ? never : NodeListOf<E>
+    querySelectorAll<E extends Element = Element>(
+      selector: string,
+    ): NodeListOf<E>
 
     closest<S extends string, E extends StrictlyParseSelector<S, HTMLElement>>(
       selector: S,
@@ -44,6 +48,7 @@ declare global {
     >(
       selector: S,
     ): [E] extends [never] ? never : E | null
+    querySelector<E extends Element = Element>(selector: string): E | null
 
     querySelectorAll<
       S extends string,
@@ -51,6 +56,9 @@ declare global {
     >(
       selector: S,
     ): [E] extends [never] ? never : NodeListOf<E>
+    querySelectorAll<E extends Element = Element>(
+      selector: string,
+    ): NodeListOf<E>
   }
 
   interface DocumentFragment {
@@ -60,6 +68,7 @@ declare global {
     >(
       selector: S,
     ): [E] extends [never] ? never : E | null
+    querySelector<E extends Element = Element>(selector: string): E | null
 
     querySelectorAll<
       S extends string,
@@ -67,5 +76,8 @@ declare global {
     >(
       selector: S,
     ): [E] extends [never] ? never : NodeListOf<E>
+    querySelectorAll<E extends Element = Element>(
+      selector: string,
+    ): NodeListOf<E>
   }
 }

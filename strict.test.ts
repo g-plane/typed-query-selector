@@ -109,3 +109,11 @@ type TestClosest = Expect<
 >
 const invalidClosest = a1!.closest('button.btn-confirm, a.')
 type TestInvalidClosest = Expect<Equal<typeof invalidClosest, never>>
+
+declare let documentFragment: DocumentFragment
+document.querySelector<Element>('my-web-component')
+document.querySelectorAll<Element>('my-web-component')
+element.querySelector<Element>('my-web-component')
+element.querySelectorAll<Element>('my-web-component')
+documentFragment.querySelector<Element>('my-web-component')
+documentFragment.querySelectorAll<Element>('my-web-component')
