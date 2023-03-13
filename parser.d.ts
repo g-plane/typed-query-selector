@@ -82,11 +82,9 @@ type ExpandFunctions<I> = I extends `${infer L}:is(${infer Args})${infer R}`
   : I
 
 /** Check whether each tag is valid or not. */
-type Postprocess<Tags> = PostprocessEach<GetLastTag<Tags>> extends infer T
-  ? T extends string
-    ? T
-    : unknown
-  : never
+type Postprocess<Tags> = PostprocessEach<GetLastTag<Tags>> extends string
+  ? PostprocessEach<GetLastTag<Tags>>
+  : unknown
 /** Postprocess each tag with simple validation. */
 type PostprocessEach<I> = I extends `${string}.` // invalid class selector
   ? unknown
@@ -110,20 +108,16 @@ type PostprocessEachUnchecked<I> =
     ? PostprocessEachUnchecked<Tag>
     : I
 
-type ParseSelectorToTagNames<I extends string> = Trim<I> extends infer I
-  ? I extends ''
-    ? unknown
-    : Postprocess<Split<ExpandFunctions<Preprocess<PreprocessGrouping<I>>>>>
-  : unknown
+type ParseSelectorToTagNames<I extends string> = Trim<I> extends ''
+  ? unknown
+  : Postprocess<Split<ExpandFunctions<Preprocess<PreprocessGrouping<Trim<I>>>>>>
 
 export type ParseSelector<
   I extends string,
   Fallback extends Element = Element,
-> = ParseSelectorToTagNames<I> extends infer TagNames
-  ? TagNames extends string
-    ? ExpandAnd<TagNames, Fallback>
-    : Fallback
-  : never
+> = ParseSelectorToTagNames<I> extends string
+  ? ExpandAnd<ParseSelectorToTagNames<I>, Fallback>
+  : Fallback
 
 /**
  * Wrapper for `...&...` syntax expander.
@@ -131,14 +125,13 @@ export type ParseSelector<
  * `&` is valid, but the expander will return the default result which is `unknown`,
  * so we must check the result and if it's `unknown` we will turn it into `Fallback`.
  */
-type ExpandAnd<I extends string, Fallback extends Element> = ExpandAndInner<
-  I,
-  Fallback
-> extends infer Result
-  ? unknown extends Result
-    ? Fallback
-    : Result
-  : never
+type ExpandAnd<
+  I extends string,
+  Fallback extends Element,
+> = unknown extends ExpandAndInner<I, Fallback>
+  ? Fallback
+  : ExpandAndInner<I, Fallback>
+
 /**
  * Actually expand the `...&...` syntax.
  *
