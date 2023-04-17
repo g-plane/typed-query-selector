@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.10.0
+
 - Reverted to fallback to `Element`, not `HTMLElement`.
 
 ## v2.9.2
