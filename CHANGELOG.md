@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Reverted to fallback to `Element`, not `HTMLElement`.
+
 ## v2.9.2
 
 - Fixed regression of specifying fallback type. (Fix [#33](https://github.com/g-plane/typed-query-selector/issues/33))

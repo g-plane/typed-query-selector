@@ -29,11 +29,11 @@ type TestClosest = Expect<
 >
 
 const unknownEl = document.querySelector('unknown')
-type TestElement = Expect<Equal<typeof unknownEl, HTMLElement | null>>
+type TestElement = Expect<Equal<typeof unknownEl, Element | null>>
 
 declare let btn: HTMLButtonElement
 const elementOfBtn = btn.querySelector('unknown')
-type TestElementOfBtn = Expect<Equal<typeof elementOfBtn, HTMLElement | null>>
+type TestElementOfBtn = Expect<Equal<typeof elementOfBtn, Element | null>>
 
 declare let element: Element
 const elementOfElement = element.querySelector('unknown')
