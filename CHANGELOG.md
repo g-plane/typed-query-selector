@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.10.1
+
+- Setup publishing on GitHub Actions. No code changes.
+
 ## v2.10.0
 
 - Reverted to fallback to `Element`, not `HTMLElement`.
