@@ -1,4 +1,4 @@
-import type { ParseSelector } from './parser'
+import type { ParseSelector } from './parser.js'
 
 declare global {
   interface ParentNode {
