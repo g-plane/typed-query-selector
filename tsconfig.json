@@ -3,7 +3,6 @@
   "compilerOptions": {
     "skipLibCheck": false,
     "noEmit": true,
-    "noUnusedLocals": false,
-    "moduleResolution": "node16"
+    "noUnusedLocals": false
   }
 }
