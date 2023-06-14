@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.11.0
+
+- Added `.js` extension in import statements.
+
 ## v2.10.1
 
 - Setup publishing on GitHub Actions. No code changes.
