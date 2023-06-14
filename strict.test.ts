@@ -1,4 +1,4 @@
-import './strict'
+import './strict.js'
 import type { Equal, Expect } from '@type-challenges/utils'
 
 const e1 = document.querySelector('#app')

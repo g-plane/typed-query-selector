@@ -1,5 +1,5 @@
 import type { Equal, Expect, NotEqual } from '@type-challenges/utils'
-import type { ParseSelector } from './parser'
+import type { ParseSelector } from './parser.js'
 
 declare class DefinedWebComponent extends HTMLElement {
   #brand

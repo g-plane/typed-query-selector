@@ -1,4 +1,4 @@
-import './shim'
+import './shim.js'
 import type { Equal, Expect } from '@type-challenges/utils'
 
 const htmlEl = document.querySelector(
