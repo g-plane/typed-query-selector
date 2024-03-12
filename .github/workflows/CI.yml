@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Setup pnpm
-      uses: pnpm/action-setup@v2.2.2
+      uses: pnpm/action-setup@v3.0.0
       with:
-        version: 7.1.9
+        version: 8.15.2
         run_install: true
     - name: Prettier check
       run: pnpx prettier --check *.ts
@@ -23,11 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: ./g-plane/typed-query-selector
     - name: Checkout "refined-github"
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: sindresorhus/refined-github
         ref: 6e1be0b732b272b3bf58c4db0d9d76fb8ed5c11e
