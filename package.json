@@ -13,7 +13,8 @@
   "sideEffects": false,
   "scripts": {
     "test": "tsc -p .",
-    "fmt": "prettier --write *.ts"
+    "fmt": "prettier --write *.ts",
+    "fmt:check": "prettier --check *.ts"
   },
   "devDependencies": {
     "@gplane/tsconfig": "^6.1.0",

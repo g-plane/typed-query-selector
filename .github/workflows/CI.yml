@@ -14,8 +14,8 @@ jobs:
       with:
         version: 8.15.2
         run_install: true
-    - name: Prettier check
-      run: pnpx prettier --check *.ts
+    - name: Code style check
+      run: pnpm fmt:check
     - name: Run tests
       run: pnpm test
   user_test:
