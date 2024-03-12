@@ -16,9 +16,9 @@
     "fmt": "prettier --write *.ts"
   },
   "devDependencies": {
-    "@gplane/tsconfig": "^6.0.0",
+    "@gplane/tsconfig": "^6.1.0",
     "@type-challenges/utils": "^0.1.1",
     "prettier": "^3.0.3",
-    "typescript": "^5.1.3"
+    "typescript": "^5.4.2"
   }
 }

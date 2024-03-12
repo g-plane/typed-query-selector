@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@gplane/tsconfig':
-    specifier: ^6.0.0
-    version: 6.0.0
+    specifier: ^6.1.0
+    version: 6.1.0
   '@type-challenges/utils':
     specifier: ^0.1.1
     version: 0.1.1
@@ -15,13 +15,13 @@ devDependencies:
     specifier: ^3.0.3
     version: 3.0.3
   typescript:
-    specifier: ^5.1.3
-    version: 5.1.3
+    specifier: ^5.4.2
+    version: 5.4.2
 
 packages:
 
-  /@gplane/tsconfig@6.0.0:
-    resolution: {integrity: sha512-K61z8tl3I5tR66MJoGoBCY1y950fybDfPol7uzcg/YPilretE0bl41GOOX0BpRbblYLOWzSJvdqlimzjAfryog==}
+  /@gplane/tsconfig@6.1.0:
+    resolution: {integrity: sha512-+WNtFH0x1Jjtp5m90dY5/u9wje5GAwjoEHJd60lQUzq9h1vfZ2ILeo9iQjFW9sB06g7mBXDf99iCvY0/t0pAUQ==}
     dev: true
 
   /@type-challenges/utils@0.1.1:
@@ -34,8 +34,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.1.3:
-    resolution: {integrity: sha512-XH627E9vkeqhlZFQuL+UsyAXEnibT0kWR2FWONlr4sTjvxyJYnyefgrkyECLzM5NenmKzRAy2rR/OlYLA1HkZw==}
+  /typescript@5.4.2:
+    resolution: {integrity: sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true

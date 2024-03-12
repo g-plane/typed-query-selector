@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed for TypeScript 5.4. (Fix [#35](https://github.com/g-plane/typed-query-selector/issues/35))
+
 ## v2.11.0
 
 - Added `.js` extension in import statements.

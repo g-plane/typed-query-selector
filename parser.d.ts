@@ -72,9 +72,13 @@ type PreprocessUnchecked<I> = I extends `${infer L}\\${Quotes}${infer R}` // rem
 
 /** Parse `:is()` and `:where()` */
 type ExpandFunctions<I> = I extends `${infer L}:is(${infer Args})${infer R}`
-  ? ExpandFunctions<`${L}&${Split<Trim<Args>>}${R}`>
+  ? Split<Trim<Args>> extends string
+    ? ExpandFunctions<`${L}&${Split<Trim<Args>>}${R}`>
+    : unknown
   : I extends `${infer L}:where(${infer Args})${infer R}`
-  ? ExpandFunctions<`${L}&${Split<Trim<Args>>}${R}`>
+  ? Split<Trim<Args>> extends string
+    ? ExpandFunctions<`${L}&${Split<Trim<Args>>}${R}`>
+    : unknown
   : I extends `${infer L}:${infer Pseudo}(${string})${infer R}`
   ? IsIdentifier<Pseudo> extends true
     ? ExpandFunctions<`${L}${R}`>
