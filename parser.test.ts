@@ -355,3 +355,8 @@ type _Tests = [
     >
   >,
 ]
+
+declare function delegate<
+  Selector extends string,
+  TElement extends Element = ParseSelector<Selector, HTMLElement>,
+>(selector: Selector): void
