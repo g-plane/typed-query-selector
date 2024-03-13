@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed handling `unknown` incorrectly. (Fix [#36](https://github.com/g-plane/typed-query-selector/issues/36))
+
 ## v2.11.1
 
 - Fixed for TypeScript 5.4. (Fix [#35](https://github.com/g-plane/typed-query-selector/issues/35))

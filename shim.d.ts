@@ -6,7 +6,7 @@ declare global {
 
     querySelectorAll<S extends string>(
       selector: S,
-    ): NodeListOf<ParseSelector<S> extends Node ? ParseSelector<S> : Node>
+    ): NodeListOf<ParseSelector<S>>
   }
 
   interface Element {

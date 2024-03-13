@@ -120,7 +120,9 @@ export type ParseSelector<
   I extends string,
   Fallback extends Element = Element,
 > = ParseSelectorToTagNames<I> extends string
-  ? ExpandAnd<ParseSelectorToTagNames<I>, Fallback>
+  ? ExpandAnd<ParseSelectorToTagNames<I>, Fallback> extends Element
+    ? ExpandAnd<ParseSelectorToTagNames<I>, Fallback>
+    : Fallback
   : Fallback
 
 /**
