@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## v.2.11.2
+## v2.11.2
 
 - Fixed handling `unknown` incorrectly. (Fix [#36](https://github.com/g-plane/typed-query-selector/issues/36))
 
