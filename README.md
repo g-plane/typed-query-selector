@@ -199,7 +199,7 @@ import 'typed-query-selector'
 document.querySelector('my-web-component') // ==> Element
 ```
 
-However, you can override it by specifying a concrete type as a type parameter.
+However, you can override it by specifying a concrete type as a type argument.
 
 ```typescript
 document.querySelector<MyComponent>('my-web-component') // ==> MyComponent
@@ -207,13 +207,13 @@ document.querySelector<MyComponent>('my-web-component') // ==> MyComponent
 
 _[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHo2vIEMo04q2SS4BZZAGEI4CADs04+GgAeMKRj4AJACr8AMgFFKIKfADeAX0YYIVPHukA6fIWQBlCtVpQAFAhDEA7mgBGWFSikJLSCACUcAD0UXAAvHEAfHA6aFYwpuaW+rYERE6UNNAAPIIiYqEwiR5eWL4BQRX6EdGxCcllwRL6QA)_
 
-Alternatively, you can use [global augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#global-augmentation) and [interface merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces) to extend `HTMLElementTagNameMap` with your custom element.
+Alternatively, you can use [global augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#global-augmentation) and [interface merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces) to extend `HTMLElementTagNameMap` with your custom elements.
 
 ```typescript
 declare global {
-    interface HTMLElementTagNameMap {
-        'my-web-component': MyComponent;
-    }
+  interface HTMLElementTagNameMap {
+    'my-web-component': MyComponent
+  }
 }
 
 document.querySelector('my-web-component') // ==> MyComponent
