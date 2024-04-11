@@ -27,7 +27,7 @@ document.querySelector('div#app > form#login') // ==> HTMLFormElement
 
 document.querySelectorAll('span.badge') // ==> NodeListOf<HTMLSpanElement>
 
-anElement.querySelector('button#submit') // ==> HTMLButtonElement
+document.querySelector('button#submit') // ==> HTMLButtonElement
 ```
 
 _[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEGYADcAxAEMwYBAEo4AenVwAvNoB8cABIAVALIAZACIyAopXZdGzVg558iQyjWgSpcxWBwBgBm0CCy5BAA5sAcqhpaugYmFgBiYXZork4sbJxuBB7C3lAAguTkEiRg8hzcAEbyGFFo8Zo6+nAAchAYaObAJDAA8sEAPCnmAjUcma56TtTk8lBocJTwtXP5AFxGZubbjvRb9vm8hYLFohL1eDC0HLIkePUgwDBtiZ2TAEL3jyOMHoQA)_
