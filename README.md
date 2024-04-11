@@ -252,7 +252,7 @@ el.className // TypeScript will report error when compiling
 In runtime, if you pass an invalid selector string to `querySelector` or
 `querySelectorAll` function, it will throw an error instead of returning
 `null` or `undefined` or anything else.
-For details, please read [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/basic-types.html#never).
+For details, please read [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type).
 
 ## 🔗 Related
 
