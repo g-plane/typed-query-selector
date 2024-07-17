@@ -20,6 +20,7 @@ jobs:
       run: pnpm test
   user_test:
     name: User Test
+    if: false # due to upstream bug
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
