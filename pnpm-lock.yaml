@@ -1,41 +1,50 @@
-lockfileVersion: '6.0'
+lockfileVersion: '9.0'
 
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-devDependencies:
-  '@gplane/tsconfig':
-    specifier: ^6.1.0
-    version: 6.1.0
-  '@type-challenges/utils':
-    specifier: ^0.1.1
-    version: 0.1.1
-  prettier:
-    specifier: ^3.0.3
-    version: 3.0.3
-  typescript:
-    specifier: ^5.4.2
-    version: 5.4.2
+importers:
+
+  .:
+    devDependencies:
+      '@gplane/tsconfig':
+        specifier: ^6.1.0
+        version: 6.1.0
+      '@type-challenges/utils':
+        specifier: ^0.1.1
+        version: 0.1.1
+      prettier:
+        specifier: ^3.0.3
+        version: 3.0.3
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
 
 packages:
 
-  /@gplane/tsconfig@6.1.0:
+  '@gplane/tsconfig@6.1.0':
     resolution: {integrity: sha512-+WNtFH0x1Jjtp5m90dY5/u9wje5GAwjoEHJd60lQUzq9h1vfZ2ILeo9iQjFW9sB06g7mBXDf99iCvY0/t0pAUQ==}
-    dev: true
 
-  /@type-challenges/utils@0.1.1:
+  '@type-challenges/utils@0.1.1':
     resolution: {integrity: sha512-A7ljYfBM+FLw+NDyuYvGBJiCEV9c0lPWEAdzfOAkb3JFqfLl0Iv/WhWMMARHiRKlmmiD1g8gz/507yVvHdQUYA==}
-    dev: true
 
-  /prettier@3.0.3:
+  prettier@3.0.3:
     resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
 
-  /typescript@5.4.2:
-    resolution: {integrity: sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==}
+  typescript@5.5.3:
+    resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
+
+snapshots:
+
+  '@gplane/tsconfig@6.1.0': {}
+
+  '@type-challenges/utils@0.1.1': {}
+
+  prettier@3.0.3: {}
+
+  typescript@5.5.3: {}
