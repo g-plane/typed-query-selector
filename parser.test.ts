@@ -360,3 +360,8 @@ declare function delegate<
   Selector extends string,
   TElement extends Element = ParseSelector<Selector, HTMLElement>,
 >(selector: Selector): void
+
+declare function fetchDom<
+  Selector extends string,
+  TElement extends HTMLElement = ParseSelector<Selector, HTMLElement>,
+>(selector: Selector): Promise<TElement | undefined>
