@@ -29,23 +29,23 @@ jobs:
     - name: Checkout "refined-github"
       uses: actions/checkout@v4
       with:
-        repository: sindresorhus/refined-github
+        repository: refined-github/refined-github
         ref: f462a67be700d790d5e4ea988479e0883d585e7d
-        path: ./sindresorhus/refined-github
+        path: ./refined-github/refined-github
     - name: Install dependencies
       run: npm ci
-      working-directory: ./sindresorhus/refined-github
+      working-directory: ./refined-github/refined-github
     - name: Link package
       run: |
         cd ./g-plane/typed-query-selector
         sudo npm link
-        cd ../../sindresorhus/refined-github
+        cd ../../refined-github/refined-github
         npm link typed-query-selector
     - name: Execute in non-strict mode
       run: node node_modules/.bin/tsc --noEmit --extendedDiagnostics
-      working-directory: ./sindresorhus/refined-github
+      working-directory: ./refined-github/refined-github
     - name: Execute in strict mode
       run: |
         sed -i "s/typed-query-selector/typed-query-selector\/strict/" source/refined-github.ts
         node node_modules/.bin/tsc --noEmit --extendedDiagnostics
-      working-directory: ./sindresorhus/refined-github
+      working-directory: ./refined-github/refined-github
