@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.11.3
+
 - Fixed for TypeScript 5.5.
 
 ## v2.11.2

@@ -3,7 +3,7 @@
   "description": "Better typed `querySelector` and `querySelectorAll`.",
   "author": "Pig Fang <g-plane@hotmail.com>",
   "repository": "g-plane/typed-query-selector",
-  "version": "2.11.2",
+  "version": "2.11.3",
   "license": "MIT",
   "files": [
     "*.d.ts"
