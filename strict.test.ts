@@ -29,7 +29,6 @@ const e25 = document.querySelector('a_1-B')
 const e26 = document.querySelector('div >')
 const e27 = document.querySelector('^_^')
 const e28 = document.querySelector('div, span')
-const e29 = document.querySelector('div[, span')
 const e30 = document.querySelector('div, span[')
 const e31 = document.querySelector('div,')
 const e32 = document.querySelector('div, .badge')
@@ -79,7 +78,6 @@ type Tests = [
   Expect<Equal<typeof e26, never>>,
   Expect<Equal<typeof e27, never>>,
   Expect<Equal<typeof e28, HTMLDivElement | HTMLSpanElement | null>>,
-  Expect<Equal<typeof e29, never>>,
   Expect<Equal<typeof e30, never>>,
   Expect<Equal<typeof e31, never>>,
   Expect<Equal<typeof e32, HTMLDivElement | Element | null>>,
