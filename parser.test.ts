@@ -355,6 +355,8 @@ type _Tests = [
       Element
     >
   >,
+  Expect<Equal<ParseSelector<':func(arg)'>, Element>>,
+  Expect<Equal<ParseSelector<'::func(arg)'>, Element>>,
 ]
 
 declare function delegate<

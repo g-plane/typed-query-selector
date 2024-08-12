@@ -34,6 +34,8 @@ type PseudoClassesFirstChar =
 
 type Split<S> = S extends `${string},` // invalid selector
   ? unknown
+  : S extends ''
+  ? ''
   : SplitRec<S>
 type SplitRec<S, Acc = never> = S extends `${infer Left},${infer Right}`
   ? SplitRec<Right, Acc | Left>
