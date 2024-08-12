@@ -68,6 +68,8 @@ type PreprocessUnchecked<I> = I extends `${infer L}\\${Quotes}${infer R}` // rem
   ? PreprocessUnchecked<`${L}${R}`>
   : I extends `${infer L}[${string}]${infer R}` // process attribute
   ? PreprocessUnchecked<`${L}#x${R}`> // replace it with a fake ID selector
+  : I extends `${infer L}[${string}${infer R}` // process unclosed attribute
+  ? PreprocessUnchecked<`${L}#x${R}`> // replace it with a fake ID selector
   : I
 
 /** Parse `:is()` and `:where()` */

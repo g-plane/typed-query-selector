@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed parsing unclosed attribute selector (such as `a[href`).
+
 ## v2.11.3
 
 - Fixed for TypeScript 5.5.
