@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v2.12.0
+
 - Added support of special case for custom pseudo element selector.
 
 ## v2.11.4
