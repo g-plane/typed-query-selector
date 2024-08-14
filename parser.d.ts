@@ -12,7 +12,7 @@ type GetLastTag<I> = I extends `${string}${Combinators}${infer Right}`
     : GetLastTag<Right>
   : I
 
-type PseudoClassesFirstChar =
+type PseudoPrefix =
   | 'a'
   | 'b'
   | 'c'
@@ -31,6 +31,7 @@ type PseudoClassesFirstChar =
   | 'u'
   | 'v'
   | 'w'
+  | ':-'
 
 type Split<S> = S extends `${string},` // invalid selector
   ? unknown
@@ -108,9 +109,9 @@ type PostprocessEachUnchecked<I> =
     ? PostprocessEachUnchecked<`${Tag}&${Rest}`>
     : I extends `${infer Tag}#${string}`
     ? PostprocessEachUnchecked<Tag>
-    : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}&${infer Rest}`
+    : I extends `${infer Tag}:${PseudoPrefix}${string}&${infer Rest}`
     ? PostprocessEachUnchecked<`${Tag}&${Rest}`>
-    : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
+    : I extends `${infer Tag}:${PseudoPrefix}${string}`
     ? PostprocessEachUnchecked<Tag>
     : I extends `${string}|${infer Tag}` // namespace prefix
     ? PostprocessEachUnchecked<Tag>

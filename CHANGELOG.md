@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added support of special case for custom pseudo element selector.
+
 ## v2.11.4
 
 - Fixed parsing unclosed attribute selector (such as `a[href`).
