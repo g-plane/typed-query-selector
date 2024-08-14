@@ -12,8 +12,7 @@ type GetLastTag<I> = I extends `${string}${Combinators}${infer Right}`
     : GetLastTag<Right>
   : I
 
-type PseudoFirstChar =
-  | ':'
+type PseudoClassesFirstChar =
   | 'a'
   | 'b'
   | 'c'
@@ -109,9 +108,9 @@ type PostprocessEachUnchecked<I> =
     ? PostprocessEachUnchecked<`${Tag}&${Rest}`>
     : I extends `${infer Tag}#${string}`
     ? PostprocessEachUnchecked<Tag>
-    : I extends `${infer Tag}:${PseudoFirstChar}${string}&${infer Rest}`
+    : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}&${infer Rest}`
     ? PostprocessEachUnchecked<`${Tag}&${Rest}`>
-    : I extends `${infer Tag}:${PseudoFirstChar}${string}`
+    : I extends `${infer Tag}:${PseudoClassesFirstChar}${string}`
     ? PostprocessEachUnchecked<Tag>
     : I extends `${string}|${infer Tag}` // namespace prefix
     ? PostprocessEachUnchecked<Tag>

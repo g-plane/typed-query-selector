@@ -2,8 +2,6 @@
 
 ## Unreleased
 
-- Fixed parsing pseudo element selectors.
-
 ## v2.11.4
 
 - Fixed parsing unclosed attribute selector (such as `a[href`).
