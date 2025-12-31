@@ -14,6 +14,9 @@ importers:
       '@type-challenges/utils':
         specifier: ^0.1.1
         version: 0.1.1
+      '@typescript/native-preview':
+        specifier: 7.0.0-dev.20251230.1
+        version: 7.0.0-dev.20251230.1
       prettier:
         specifier: ^3.0.3
         version: 3.0.3
@@ -28,6 +31,45 @@ packages:
 
   '@type-challenges/utils@0.1.1':
     resolution: {integrity: sha512-A7ljYfBM+FLw+NDyuYvGBJiCEV9c0lPWEAdzfOAkb3JFqfLl0Iv/WhWMMARHiRKlmmiD1g8gz/507yVvHdQUYA==}
+
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-JRyr0mzauRgccWsRhIhHzTGRZmADp/y/bF9qKcufDDVdQiziEnVH1rtg0ePmNWwaiBN0wtMvFC1FJBuDwOBbpw==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-BqDG8vVWf5eS8pSPZAE2+SSABeaBzeO0SFK8dsValhxFXU9fOvx+ipjwx9XSP/mmiI5dGrLWNWFCLpHLz+5HCA==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-ZEaZ4NjwEpY74rsXQKYDAOOniTi5gdfj4J6SKycXQfkKDcceiCNAtHKKqg3mKbbqo5t9LDKUTrNvXZZcApfVmQ==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-blHrcAeT4DWu3P9xROzHNJQyqEI+bpxbDlbKuaHjoBmOQcDkWqzgC77H6PchrMy6XS06kiso5r79YB1QB9fdrA==}
+    cpu: [arm]
+    os: [linux]
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-spqetji1aYItC/6gmcdETQt5c9HLN/kAAEc1Tp+AOFWOnYWU68Ba7KobFNJJ7MXuqRl7YfceCALGVgUCh+/a/g==}
+    cpu: [x64]
+    os: [linux]
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-0v7xabWEQZF+WEcYyv3nniPNnP4Xdyeli0uOIiZgAkdNNP32boTOMGGdrsj6zkVUiG9/Dj2I4ALWLZ7YdSpcpQ==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-Na009pIwwMENmb/DE6AErXom2CmSepqfw+ZklnPLxLrrf4JFxuB2HNAdjtVQ+EYWWWd5IVNpJij8qhRG/j2Nhw==}
+    cpu: [x64]
+    os: [win32]
+
+  '@typescript/native-preview@7.0.0-dev.20251230.1':
+    resolution: {integrity: sha512-nZOKxRCAkE6675R4n2dZIAwqaHc+R6zlqMRhf08chxQjT8O46tjzm0sBCo2Aqwqlc/zfi+a8NZi6PnVj8mN2Wg==}
+    hasBin: true
 
   prettier@3.0.3:
     resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
@@ -44,6 +86,37 @@ snapshots:
   '@gplane/tsconfig@6.1.0': {}
 
   '@type-challenges/utils@0.1.1': {}
+
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20251230.1':
+    optional: true
+
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20251230.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20251230.1':
+    optional: true
+
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20251230.1':
+    optional: true
+
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20251230.1':
+    optional: true
+
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20251230.1':
+    optional: true
+
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20251230.1':
+    optional: true
+
+  '@typescript/native-preview@7.0.0-dev.20251230.1':
+    optionalDependencies:
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20251230.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20251230.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20251230.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20251230.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20251230.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20251230.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20251230.1
 
   prettier@3.0.3: {}
 
