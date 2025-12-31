@@ -21,6 +21,6 @@
     "@type-challenges/utils": "^0.1.1",
     "@typescript/native-preview": "7.0.0-dev.20251230.1",
     "prettier": "^3.0.3",
-    "typescript": "^5.5.3"
+    "typescript": "^5.9.3"
   }
 }

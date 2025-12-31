@@ -21,8 +21,8 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
       typescript:
-        specifier: ^5.5.3
-        version: 5.5.3
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 
@@ -76,8 +76,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  typescript@5.5.3:
-    resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -120,4 +120,4 @@ snapshots:
 
   prettier@3.0.3: {}
 
-  typescript@5.5.3: {}
+  typescript@5.9.3: {}
