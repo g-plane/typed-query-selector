@@ -17,10 +17,10 @@
     "fmt:check": "prettier --check *.ts"
   },
   "devDependencies": {
-    "@gplane/tsconfig": "^6.1.0",
+    "@gplane/tsconfig": "^6.2.0",
     "@type-challenges/utils": "^0.1.1",
-    "@typescript/native-preview": "7.0.0-dev.20251230.1",
-    "prettier": "^3.0.3",
+    "@typescript/native-preview": "7.0.0-dev.20260225.1",
+    "prettier": "~3.0.3",
     "typescript": "^5.9.3"
   }
 }
