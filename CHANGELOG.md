@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.12.1
+
+- Fixed two-level nesting pseudo class selectors.
+
 ## v2.12.0
 
 - Added support of special case for custom pseudo element selector.
