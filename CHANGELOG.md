@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v2.12.2
+
+- Fixed tab (`\t`) as combinator.
+
 ## v2.12.1
 
 - Fixed two-level nesting pseudo class selectors.
