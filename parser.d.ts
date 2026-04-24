@@ -5,7 +5,7 @@ type Trim<S extends string> = S extends `${infer T}${Whitespace}`
   ? Trim<T>
   : S
 
-type Combinators = ' ' | '>' | '~' | '+'
+type Combinators = Whitespace | '>' | '~' | '+'
 type GetLastTag<I> = I extends `${string}${Combinators}${infer Right}`
   ? Right extends '' // right arm can't be empty
     ? unknown

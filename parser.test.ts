@@ -359,6 +359,31 @@ type _Tests = [
   Expect<Equal<ParseSelector<'::func(arg)'>, Element>>,
   Expect<Equal<ParseSelector<'a::-p-text(Hello)'>, HTMLAnchorElement>>,
   Expect<Equal<ParseSelector<'table:not(:has(> caption))'>, HTMLTableElement>>,
+
+  // #region tab-indented
+  Expect<
+    Equal<
+      ParseSelector<`
+	:is(.parent)
+	a:is(
+		[href]
+	)
+`>,
+      HTMLAnchorElement
+    >
+  >,
+  Expect<
+    Equal<
+      ParseSelector<`
+	*
+	a:is(
+		[href]
+	)
+`>,
+      HTMLAnchorElement
+    >
+  >,
+  // #endregion
 ]
 
 declare function delegate<
