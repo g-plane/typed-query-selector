@@ -13,10 +13,19 @@ npm i -D typed-query-selector
 
 ### Automatic shim
 
-All you need to do is to import this module,
-then the `querySelector` and `querySelectorAll` function will be enhanced.
+You can modify your `tsconfig.json` as below because this package contains type definitions only.
+This is recommended since TypeScript 6.0.
 
-This module only works at type level and doesn't have any runtime code.
+```json
+{
+  "compilerOptions": {
+    "types": ["typed-query-selector"]
+  }
+}
+```
+
+Alternatively you can import this package if you're using bundler.
+This package only works at type level and doesn't have any runtime code.
 
 ```typescript
 import 'typed-query-selector'
@@ -31,32 +40,6 @@ anElement.querySelector('button#submit') // ==> HTMLButtonElement
 ```
 
 _[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAchgTzAUwCYFoCOBXNKZLAZzQBs0BjGaBAKHowirxDQDsYA6fQ5AMoVqtKAAoEGYADcAxAEMwYBAEo4AenVwAvNoB8cABIAVALIAZACIyAopXZdGzVg558iQyjWgSpcxWBwBgBm0CCy5BAA5sAcqhpaugYmFgBiYXZork4sbJxuBB7C3lAAguTkEiRg8hzcAEbyGFFo8Zo6+nAAchAYaObAJDAA8sEAPCnmAjUcma56TtTk8lBocJTwtXP5AFxGZubbjvRb9vm8hYLFohL1eDC0HLIkePUgwDBtiZ2TAEL3jyOMHoQA)_
-
-The example above assumes you're using bundlers or build tools with transpilers,
-however, sometimes this may not match your situation.
-For example, running `tsc` or Babel out of bundlers.
-In this case, you can import this library like this:
-
-```typescript
-import type {} from 'typed-query-selector'
-
-document.querySelector('div#app') // ==> HTMLDivElement
-```
-
-_[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBDAnmApnA3gXzgMyhEOAciVQBMBaARwFcUpEKBnFAGxQGMZoiAoXshA40QKAHYwAdLXqIAym07coACiJlgANwDEAQzBgiASjgB6U3AC8lgHxwAEgBUAsgBkAIloCi7URKA)_
-
-This looks ugly but it works.
-
-If you aren't going to use ES Modules you can modify your `tsconfig.json`,
-however this is NOT recommended, unless you know what you're doing.
-
-```json
-{
-  "compilerOptions": {
-    "types": ["typed-query-selector"]
-  }
-}
-```
 
 ### Strict mode
 
@@ -74,7 +57,18 @@ const element = document.querySelector('div[test') // return `never`
 ```
 
 This feature won't be enabled by default and you can opt-in.
-If you want to enable this, change import entry:
+If you want to enable this, modify `tsconfig.json`:
+
+```diff
+ {
+   "compilerOptions": {
+-    "types": ["typed-query-selector"]
++    "types": ["typed-query-selector/strict"]
+   }
+ }
+```
+
+or change import entry:
 
 ```diff
 - import 'typed-query-selector'
