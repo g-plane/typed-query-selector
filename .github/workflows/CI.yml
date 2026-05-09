@@ -7,27 +7,24 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4.0.0
+    - uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v6
       with:
-        version: latest
+        version: 10
         run_install: true
-    - name: Code style check
-      run: pnpm fmt:check
-    - name: Run tests
-      run: pnpm test
+    - run: pnpm fmt:check
+    - run: pnpm test
+
   user_test:
     name: User Test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: ./g-plane/typed-query-selector
     - name: Checkout "refined-github"
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: refined-github/refined-github
         ref: f462a67be700d790d5e4ea988479e0883d585e7d
