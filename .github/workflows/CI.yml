@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v6
     - uses: pnpm/action-setup@v6
       with:
-        version: 10
+        version: latest
         run_install: true
     - run: pnpm fmt:check
     - run: pnpm test
