@@ -27,7 +27,7 @@ jobs:
       uses: actions/checkout@v6
       with:
         repository: refined-github/refined-github
-        ref: f462a67be700d790d5e4ea988479e0883d585e7d
+        ref: 558ce6cbc989767820a86acf545d881a7a4d1bae
         path: ./refined-github/refined-github
     - name: Install dependencies
       run: npm ci
