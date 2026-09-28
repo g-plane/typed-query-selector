@@ -60,19 +60,18 @@ type PreprocessGrouping<I> = I extends `${infer L}, ${infer R}`
   ? PreprocessGrouping<`${L},${R}`>
   : I
 
-type Preprocess<I> = I extends `${string}[]${string}` // invalid selector
-  ? unknown
-  : PreprocessUnchecked<I>
-type PreprocessUnchecked<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
-  ? PreprocessUnchecked<`${L}${R}`>
+type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes
+  ? Preprocess<`${L}${R}`>
   : I extends `${infer L}"${string}"${infer R}` // remove quoted content in attribute
-  ? PreprocessUnchecked<`${L}${R}`>
+  ? Preprocess<`${L}${R}`>
   : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
-  ? PreprocessUnchecked<`${L}${R}`>
+  ? Preprocess<`${L}${R}`>
+  : I extends `${infer L}[]${infer R}` // invalid attribute selector
+  ? unknown
   : I extends `${infer L}[${string}]${infer R}` // process attribute
-  ? PreprocessUnchecked<`${L}#x${R}`> // replace it with a fake ID selector
+  ? Preprocess<`${L}#x${R}`> // replace it with a fake ID selector
   : I extends `${infer L}[${string}${infer R}` // process unclosed attribute
-  ? PreprocessUnchecked<`${L}#x${R}`> // replace it with a fake ID selector
+  ? Preprocess<`${L}#x${R}`> // replace it with a fake ID selector
   : I
 
 /** Parse `:is()` and `:where()` */
