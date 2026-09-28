@@ -8,15 +8,8 @@
   "files": [
     "*.d.ts"
   ],
-  "type": "module",
   "main": "shim.d.ts",
   "types": "shim.d.ts",
-  "exports": {
-    ".": "./shim.d.ts",
-    "./strict": "./strict.d.ts",
-    "./parser": "./parser.d.ts",
-    "./package.json": "./package.json"
-  },
   "sideEffects": false,
   "scripts": {
     "test": "tsc -p . && tsc6 -p .",
