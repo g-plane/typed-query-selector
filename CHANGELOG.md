@@ -1,6 +1,8 @@
 # Change Log
 
-## Unreleased
+## v2.12.3
+
+- Fixed brackets in attribute selector.
 
 ## v2.12.2
 
