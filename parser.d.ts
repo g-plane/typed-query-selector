@@ -46,18 +46,10 @@ type SplitRec<S, Acc = never> = S extends `${infer Left},${infer Right}`
 
 type Quotes = '"' | "'"
 
-// DO NOT use union type like `${infer L},${Whitespace}${infer R}` here,
-// or it may cause OOM when running tsc in downstream projects.
-type PreprocessGrouping<I> = I extends `${infer L}, ${infer R}`
-  ? PreprocessGrouping<`${L},${R}`>
-  : I extends `${infer L},\n${infer R}`
-  ? PreprocessGrouping<`${L},${R}`>
-  : I extends `${infer L},\r${infer R}`
-  ? PreprocessGrouping<`${L},${R}`>
-  : I extends `${infer L},\f${infer R}`
-  ? PreprocessGrouping<`${L},${R}`>
-  : I extends `${infer L},\t${infer R}`
-  ? PreprocessGrouping<`${L},${R}`>
+type PreprocessGrouping<I> = I extends `${infer L},${Whitespace}${infer R}`
+  ? PreprocessGrouping<`${L},${Trim<R>}`>
+  : I extends `${infer L}${Whitespace},${infer R}`
+  ? `${Trim<L>},${R}`
   : I
 
 type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escaped quotes

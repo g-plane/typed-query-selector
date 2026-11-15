@@ -38,7 +38,10 @@ type _Tests = [
       HTMLHeadingElement
     >
   >,
-  Expect<Equal<ParseSelector<'div, span'>, HTMLDivElement | HTMLSpanElement>>,
+  Expect<Equal<ParseSelector<'div,  span'>, HTMLDivElement | HTMLSpanElement>>,
+  Expect<
+    Equal<ParseSelector<'div\n , span'>, HTMLDivElement | HTMLSpanElement>
+  >,
   Expect<Equal<ParseSelector<'span.text-center'>, HTMLSpanElement>>,
   Expect<Equal<ParseSelector<'button#submit'>, HTMLButtonElement>>,
   Expect<Equal<ParseSelector<'input[type=email]'>, HTMLInputElement>>,
@@ -139,7 +142,10 @@ type _Tests = [
     >
   >,
   Expect<
-    Equal<ParseSelector<':is(div, span)'>, HTMLDivElement | HTMLSpanElement>
+    Equal<ParseSelector<':is(div,  span)'>, HTMLDivElement | HTMLSpanElement>
+  >,
+  Expect<
+    Equal<ParseSelector<':is(div \n, span)'>, HTMLDivElement | HTMLSpanElement>
   >,
   Expect<
     Equal<
