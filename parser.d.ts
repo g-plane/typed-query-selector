@@ -66,7 +66,7 @@ type Preprocess<I> = I extends `${infer L}\\${Quotes}${infer R}` // remove escap
   ? Preprocess<`${L}${R}`>
   : I extends `${infer L}'${string}'${infer R}` // remove quoted content in attribute
   ? Preprocess<`${L}${R}`>
-  : I extends `${infer L}[]${infer R}` // invalid attribute selector
+  : I extends `${string}[]${string}` // invalid attribute selector
   ? unknown
   : I extends `${infer L}[${string}]${infer R}` // process attribute
   ? Preprocess<`${L}#x${R}`> // replace it with a fake ID selector
@@ -84,7 +84,7 @@ type ExpandFunctions<I> = I extends `${infer L}:is(${infer Args})${infer R}`
     ? ExpandFunctions<`${L}&${Split<Trim<Args>>}${R}`>
     : unknown
   : // fix #46: it can't handle three or more levels nesting, but this should be a very rare case
-  I extends `${infer L}:${infer Pseudo}(${string}(${string})${string})${infer R}`
+  I extends `${infer L}:${string}(${string}(${string})${string})${infer R}`
   ? ExpandFunctions<`${L}${R}`>
   : I extends `${infer L}:${infer Pseudo}(${string})${infer R}`
   ? IsIdentifier<Pseudo> extends true
