@@ -1,5 +1,9 @@
 # Change Log
 
+## v2.12.4
+
+- Fixed whitespaces before comma.
+
 ## v2.12.3
 
 - Fixed brackets in attribute selector.
